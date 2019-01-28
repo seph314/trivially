@@ -22,9 +22,9 @@
 
         <div data-role="navbar">
             <ul>
-                <li><a href="#" class="ui-btn-active">Game</a></li>
-                <li><a href="#">HighScore</a></li>
-                <li><a href="#">Profile</a></li>
+                <li><a href="#welcome" class="ui-btn-active">Game</a></li>
+                <li><a href="#highscore">HighScore</a></li>
+                <li><a href="#profile">Profile</a></li>
             </ul>
         </div><!-- /navbar -->
     </div><!-- /header -->
@@ -32,7 +32,7 @@
     <div data-role="content" >
 
         <p><a href="#ingame" data-role="button">Start Game</a></p>
-        <p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
+        <p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Help</a></p>
 
         <ul data-role="listview" data-inset="true">
             <li><a href="#">Any Category</a></li>
@@ -59,9 +59,12 @@
 
     <div data-role="content" data-theme="a">
         <h2>Question 1</h2>
-        <p>I have an id of "two" on my page container. I'm the second page container in this multi-page template.</p>
-        <p>Notice that the theme is different for this page because we've added a few <code>data-theme</code> swatch assigments here to show off how flexible it is. You can add any content or widget to these pages, but we're keeping these simple.</p>
-        <p><a href="#welcome" data-direction="reverse" data-role="button" data-theme="b">Back to page "welcome"</a></p>
+        <p>"Which of these land animals move most slowly?"</p>
+        <p><a href="#" data-role="button">Snail</a></p>
+        <p><a href="#" data-role="button">Tortoise Game</a></p>
+        <p><a href="#" data-role="button">Threetoed sloth</a></p>
+
+        <p><a href="#welcome" data-direction="reverse" data-role="button" data-theme="b">Home</a></p>
 
     </div><!-- /content -->
 
@@ -75,19 +78,71 @@
 <div data-role="page" id="popup">
 
     <div data-role="header" data-theme="e">
-        <h1>Dialog</h1>
+        <h1>Trivially</h1>
     </div><!-- /header -->
 
     <div data-role="content" data-theme="d">
-        <h2>Popup</h2>
-        <p>I have an id of "popup" on my page container and only look like a dialog because the link to me had a <code>data-rel="dialog"</code> attribute which gives me this inset look and a <code>data-transition="pop"</code> attribute to change the transition to pop. Without this, I'd be styled as a normal page.</p>
-        <p><a href="#welcome" data-rel="back" data-role="button" data-inline="true" data-icon="back">Back to page "welcome"</a></p>
+        <h2>How to play</h2>
+        <p>Chose a category of questions and click Start Game to begin a game. Answer the questions by clicking on the correct button.</p>
+        <p><a href="#welcome" data-rel="back" data-role="button" data-inline="true" data-icon="back">Back</a></p>
     </div><!-- /content -->
 
     <div data-role="footer">
         <h4>Page Footer</h4>
     </div><!-- /footer -->
 </div><!-- /page popup -->
+
+<!-- Start of fourth page: #highscore -->
+<div data-role="page" id="highscore" data-theme="a">
+
+    <div data-role="header">
+        <h1>Trivially</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#welcome" class="ui-btn-active">Game</a></li>
+                <li><a href="#highscore">HighScore</a></li>
+                <li><a href="#profile">Profile</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /header -->
+
+    <div data-role="content" data-theme="a">
+        <h2>Higscore</h2>
+        <p>Highscore stuff here...</p>
+
+        <p><a href="#welcome" data-direction="reverse" data-role="button" data-theme="b">Home</a></p>
+    </div><!-- /content -->
+
+    <div data-role="footer">
+        <h4>Page Footer</h4>
+    </div><!-- /footer -->
+</div><!-- /page four -->
+
+<!-- Start of fifth page: #profile -->
+<div data-role="page" id="profile" data-theme="a">
+
+    <div data-role="header">
+        <h1>Trivially</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#welcome" class="ui-btn-active">Game</a></li>
+                <li><a href="#highscore">HighScore</a></li>
+                <li><a href="#profile">Profile</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /header -->
+
+    <div data-role="content" data-theme="a">
+        <h2>Profile</h2>
+        <p>Profile info here...</p>
+
+        <p><a href="#welcome" data-direction="reverse" data-role="button" data-theme="b">Home</a></p>
+    </div><!-- /content -->
+
+    <div data-role="footer">
+        <h4>Page Footer</h4>
+    </div><!-- /footer -->
+</div><!-- /page four -->
 
 </body>
 </html>
