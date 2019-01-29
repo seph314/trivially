@@ -1,0 +1,26 @@
+/* Centered content */
+.content-center{
+    text-align: center;
+}
+
+/* Settings */
+.settings{
+    overflow: hidden;
+}
+.sub-left {
+    float: left;
+}
+.sub-right {
+    float: right;
+}
+
+/* Profile picture */
+.profile-picture {
+    height: 5em;
+    width: 5em;
+    padding: 2em;
+    margin-bottom: 2em;
+    background-color: lightgrey;
+    border-radius: 50%;
+    display: inline-block;
+}

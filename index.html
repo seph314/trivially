@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Trivially</title>
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
 
@@ -14,7 +15,7 @@
 
 <body>
 
-<!-- Start of first page: #welcome -->
+<!-- Start of page: #welcome -->
 <div data-role="page" id="welcome">
 
     <div data-role="header">
@@ -32,35 +33,53 @@
     <div data-role="content" >
 
         <p><a href="#ingame" data-role="button">Start Game</a></p>
-        <p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Help</a></p>
 
-        <ul data-role="listview" data-inset="true">
-            <li><a href="#">Any Category</a></li>
-            <li><a href="#">Movies</a></li>
-            <li><a href="#">History</a></li>
-            <li><a href="#">Science</a></li>
-            <li><a href="#">Food</a></li>
-            <li><a href="#">Music</a></li>
-        </ul>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#" class="ui-btn-active">Easy</a></li>
+                <li><a href="#">Normal</a></li>
+                <li><a href="#">Hard</a></li>
+            </ul>
+        </div><!-- /navbar -->
+
+        <fieldset data-role="controlgroup">
+            <legend>Chose a category</legend>
+            <input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked">
+            <label for="radio-choice-1">Any Category</label>
+            <input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2">
+            <label for="radio-choice-2">Movies</label>
+            <input type="radio" name="radio-choice-1" id="radio-choice-3" value="choice-3">
+            <label for="radio-choice-3">Animals</label>
+            <input type="radio" name="radio-choice-1" id="radio-choice-4" value="choice-4">
+            <label for="radio-choice-4">Science</label>
+            <input type="radio" name="radio-choice-1" id="radio-choice-5" value="choice-5">
+            <label for="radio-choice-5">Computers</label>
+            <input type="radio" name="radio-choice-1" id="radio-choice-6" value="choice-6">
+            <label for="radio-choice-6">History</label>
+            <input type="radio" name="radio-choice-1" id="radio-choice-7" value="choice-7">
+            <label for="radio-choice-7">Geography</label>
+        </fieldset>
+
     </div><!-- /content -->
 
-    <div data-role="footer" data-theme="d">
-        <h4>Page Footer</h4>
+    <div data-role="footer">
+        <!-- footer content here -->
     </div><!-- /footer -->
 </div><!-- /page welcome -->
 
 
-<!-- Start of second page: #ingame -->
+<!-- Start of page: #ingame -->
 <div data-role="page" id="ingame" data-theme="a">
 
     <div data-role="header">
         <h1>Trivially</h1>
     </div><!-- /header -->
 
+
     <div data-role="content" data-theme="a">
         <h2>Question 1</h2>
         <p>"Which of these land animals move most slowly?"</p>
-        <p><a href="#" data-role="button">Snail</a></p>
+        <p><a href="#ingame-done" data-role="button">Snail</a></p>
         <p><a href="#" data-role="button">Tortoise Game</a></p>
         <p><a href="#" data-role="button">Threetoed sloth</a></p>
 
@@ -69,80 +88,202 @@
     </div><!-- /content -->
 
     <div data-role="footer">
-        <h4>Page Footer</h4>
+        <!-- footer content here -->
     </div><!-- /footer -->
-</div><!-- /page two -->
+</div><!-- /page ingame -->
 
 
-<!-- Start of third page: #popup -->
-<div data-role="page" id="popup">
+<!-- Start of page: #ingame -->
+<div data-role="page" id="ingame-done" data-theme="a">
 
-    <div data-role="header" data-theme="e">
+    <div data-role="header">
         <h1>Trivially</h1>
     </div><!-- /header -->
 
-    <div data-role="content" data-theme="d">
-        <h2>How to play</h2>
-        <p>Chose a category of questions and click Start Game to begin a game. Answer the questions by clicking on the correct button.</p>
-        <p><a href="#welcome" data-rel="back" data-role="button" data-inline="true" data-icon="back">Back</a></p>
+
+    <div data-role="content" data-theme="a">
+
+        <div class="content-center">
+            <p>"Well done! An up and coming master triviallist!"</p>
+            <h3>9/10</h3>
+        </div>
+
+        <p><a href="#ingame" data-direction="reverse" data-role="button" data-theme="a">Play again</a></p>
+        <p><a href="#welcome" data-direction="reverse" data-role="button" data-theme="b">Home</a></p>
+
     </div><!-- /content -->
 
     <div data-role="footer">
-        <h4>Page Footer</h4>
+        <!-- footer content here -->
     </div><!-- /footer -->
-</div><!-- /page popup -->
+</div><!-- /page ingame-done -->
 
-<!-- Start of fourth page: #highscore -->
+
+<!-- Start of page: #highscore -->
 <div data-role="page" id="highscore" data-theme="a">
 
     <div data-role="header">
         <h1>Trivially</h1>
         <div data-role="navbar">
             <ul>
-                <li><a href="#welcome" class="ui-btn-active">Game</a></li>
-                <li><a href="#highscore">HighScore</a></li>
+                <li><a href="#welcome">Game</a></li>
+                <li><a href="#highscore" class="ui-btn-active">HighScore</a></li>
                 <li><a href="#profile">Profile</a></li>
             </ul>
         </div><!-- /navbar -->
     </div><!-- /header -->
 
     <div data-role="content" data-theme="a">
-        <h2>Higscore</h2>
-        <p>Highscore stuff here...</p>
 
-        <p><a href="#welcome" data-direction="reverse" data-role="button" data-theme="b">Home</a></p>
+        <div class="content-center">
+            <h2>Your score</h2>
+        </div>
+        <table data-role="table" id="your-score-table" data-mode="columntoggle" class="ui-responsive table-stroke">
+            <thead>
+            <tr>
+                <th>Games Played</th>
+                <th>Accuracy</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>27</td>
+                <td>89%</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="content-center">
+            <h2>Highscore</h2>
+        </div>
+        <table data-role="table" id="highscore-table" data-mode="columntoggle" class="ui-responsive table-stroke">
+            <thead>
+            <tr>
+                <th data-priority="1">Rank</th>
+                <th>Player</th>
+                <th data-priority="2">Games Played</th>
+                <th>Accuracy</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>1</th>
+                <td>Liz</td>
+                <td>1337</td>
+                <td>97%</td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td>Tod</td>
+                <td>1111</td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <th>3</th>
+                <td>Garrett</td>
+                <td>745</td>
+                <td>72%</td>
+            </tr>
+            <tr>
+                <th>4</th>
+                <td>Tara</td>
+                <td>432</td>
+                <td>76%</td>
+            </tr>
+            <tr>
+                <th>5</th>
+                <td>Brian</td>
+                <td>745</td>
+                <td>72%</td>
+            </tr>
+            </tbody>
+        </table>
+
+
     </div><!-- /content -->
 
     <div data-role="footer">
-        <h4>Page Footer</h4>
+        <!-- footer content here -->
     </div><!-- /footer -->
-</div><!-- /page four -->
+</div><!-- /page highscore -->
 
-<!-- Start of fifth page: #profile -->
+
+
+<!-- Start of page: #profile -->
 <div data-role="page" id="profile" data-theme="a">
 
     <div data-role="header">
         <h1>Trivially</h1>
         <div data-role="navbar">
             <ul>
-                <li><a href="#welcome" class="ui-btn-active">Game</a></li>
+                <li><a href="#welcome">Game</a></li>
                 <li><a href="#highscore">HighScore</a></li>
-                <li><a href="#profile">Profile</a></li>
+                <li><a href="#profile" class="ui-btn-active">Profile</a></li>
             </ul>
         </div><!-- /navbar -->
     </div><!-- /header -->
 
     <div data-role="content" data-theme="a">
-        <h2>Profile</h2>
-        <p>Profile info here...</p>
 
-        <p><a href="#welcome" data-direction="reverse" data-role="button" data-theme="b">Home</a></p>
+        <div class="content-center">
+            <h2>Profile</h2>
+            <p><a href="#profile-loggedin" data-direction="reverse" data-role="button" data-theme="a">Log in with Facebook</a></p>
+        </div>
+
     </div><!-- /content -->
 
     <div data-role="footer">
-        <h4>Page Footer</h4>
+        <!-- footer content here -->
     </div><!-- /footer -->
-</div><!-- /page four -->
+</div><!-- /page profile -->
+
+
+<!-- Start of page: #profile-loggedin -->
+<div data-role="page" id="profile-loggedin" data-theme="a">
+
+    <div data-role="header">
+        <h1>Trivially</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#welcome">Game</a></li>
+                <li><a href="#highscore">HighScore</a></li>
+                <li><a href="#profile" class="ui-btn-active">Profile</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /header -->
+
+    <div data-role="content" data-theme="a">
+
+        <div class="content-center">
+            <h2>Profile</h2>
+            <div class="profile-picture">Picture</div>
+
+            <!-- logout -->
+            <p><a href="#welcome" data-direction="reverse" data-role="button" data-theme="a">Logout</a></p>
+
+            <!-- settings/show score public in highscore-->
+            <div class="settings">
+                <div class="sub-left">
+                    <p>Show my score public in Highscore</p>
+                </div>
+                <div class="sub-right">
+                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <input type="radio" name="radio-choice-h-6" id="radio-choice-h-6a" value="on" checked="checked">
+                            <label for="radio-choice-h-6a">Yes</label>
+                            <input type="radio" name="radio-choice-h-6" id="radio-choice-h-6b" value="off">
+                            <label for="radio-choice-h-6b">No</label>
+                     </fieldset>
+                </div>
+            </div>
+
+        </div>
+
+    </div><!-- /content -->
+
+    <div data-role="footer">
+        <!-- footer content here -->
+    </div><!-- /footer -->
+</div><!-- /page profile -->
 
 </body>
 </html>
