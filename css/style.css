@@ -24,3 +24,11 @@
     border-radius: 50%;
     display: inline-block;
 }
+
+/* Quit button */
+.upper-right{
+    position: absolute;
+    top: 3em;
+    right: 0.5em;
+}
+
