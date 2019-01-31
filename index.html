@@ -35,14 +35,21 @@
 
         <p><a href="#ingame" data-role="button">Start Game</a></p>
 
-        <div data-role="navbar">
-            <ul>
-                <li><a href="#" class="ui-btn-active">Easy</a></li>
-                <li><a href="#">Normal</a></li>
-                <li><a href="#">Hard</a></li>
-            </ul>
-        </div><!-- /navbar -->
+        <div class="content-center">
+            <form>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend>Difficulty</legend>
+                    <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="Easy" checked="checked">
+                    <label for="radio-choice-h-2a">Easy</label>
+                    <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="Normal">
+                    <label for="radio-choice-h-2b">Normal</label>
+                    <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="Hard">
+                    <label for="radio-choice-h-2c">Hard</label>
+                </fieldset>
+            </form>
+        </div>
 
+        <div class="content-center">
         <fieldset data-role="controlgroup">
             <legend>Chose a category</legend>
             <input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked">
@@ -60,6 +67,7 @@
             <input type="radio" name="radio-choice-1" id="radio-choice-7" value="choice-7">
             <label for="radio-choice-7">Geography</label>
         </fieldset>
+        </div>
 
     </div><!-- /content -->
 
@@ -144,7 +152,7 @@
             <thead>
             <tr>
                 <th>Games Played</th>
-                <th>Accuracy</th>
+                <th>Success Rate</th>
             </tr>
             </thead>
             <tbody>
