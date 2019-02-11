@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginBottom="30dp">
+
+        <TextView
+            android:id="@+id/gameLogo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="50dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/rashfeng"
+            android:layout_weight="2"
+            android:textColor="@android:color/black"
+            android:text="Trivially" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/highScoreNav"
+            android:layout_width="127dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="left"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:background="@drawable/back"
+            android:text="High Score" />
+
+        <TextView
+            android:id="@+id/gameNav"
+            android:layout_width="127dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_weight="2"
+            android:background="@drawable/back"
+            android:text="Game" />
+
+        <TextView
+            android:id="@+id/profileNav"
+            android:layout_width="129dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:background="@drawable/back"
+            android:text="Profile" />
+        </RelativeLayout>
+
+</LinearLayout>
