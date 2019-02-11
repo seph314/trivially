@@ -1,0 +1,11 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    </style>
+
+    <style name="MainToolBarTheme">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:layout_height">100dp</item>
+    </style>
+
+</resources>

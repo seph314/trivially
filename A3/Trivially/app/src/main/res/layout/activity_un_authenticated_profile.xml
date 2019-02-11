@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/top_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:contentInsetStart="0dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/MainToolBarTheme"
+        app:contentInsetStart="0dp">
+
+        <TextView
+            android:id="@+id/highScoreNav"
+            android:layout_width="75dip"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:text="High Score" />
+
+        <TextView
+            android:id="@+id/gameNav"
+            android:layout_width="120dip"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="Game" />
+
+        <TextView
+            android:id="@+id/profileNav"
+            android:layout_width="70dip"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:text="Profile" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/logInBtn"
+            android:layout_width="match_parent"
+            android:layout_height="117dp"
+            android:text="Log in with Facebook" />
+
+
+    </LinearLayout>
+</LinearLayout>

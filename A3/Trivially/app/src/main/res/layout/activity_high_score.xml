@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/top_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:contentInsetStart="0dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/MainToolBarTheme"
+        app:contentInsetStart="0dp">
+
+        <TextView
+            android:id="@+id/highScoreNav"
+            android:layout_width="75dip"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:text="High Score" />
+
+        <TextView
+            android:id="@+id/gameNav"
+            android:layout_width="120dip"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:text="Game" />
+
+        <TextView
+            android:id="@+id/profileNav"
+            android:layout_width="70dip"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:text="Profile" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/yourScoreHeader"
+        android:layout_width="70dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Your Score" />
+    <LinearLayout
+        android:id = "@+id/relativeLayout2"
+        android:layout_width = "fill_parent"
+        android:layout_height = "wrap_content"
+        android:layout_marginHorizontal="60dp">
+
+        <TextView
+            android:layout_width = "0dp"
+            android:layout_height = "wrap_content"
+            android:layout_weight = "1"
+            android:gravity = "center"
+            android:padding = "5dp"
+            android:text = "Name" />
+
+        <TextView
+            android:layout_width = "0dp"
+            android:layout_height = "wrap_content"
+            android:layout_weight = "2"
+            android:gravity = "center"
+            android:padding = "5dp"
+            android:text = "Games Played" />
+
+        <TextView
+            android:layout_width = "0dp"
+            android:layout_height = "wrap_content"
+            android:layout_weight = "1.5"
+            android:gravity = "center"
+            android:padding = "5dp"
+            android:text = "Success Rate" />
+    </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="70dp">
+
+        <ListView
+            android:id="@+id/personalScore"
+            android:layout_height="50dp"
+            android:layout_width="match_parent">
+        </ListView>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/highScoreHeader"
+        android:layout_width="70dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="High Score" />
+    <LinearLayout
+        android:id = "@+id/relativeLayout1"
+        android:layout_width = "fill_parent"
+        android:layout_height = "wrap_content"
+        android:layout_marginHorizontal="60dp">
+
+        <TextView
+            android:layout_width = "0dp"
+            android:layout_height = "wrap_content"
+            android:layout_weight = "1"
+            android:gravity = "center"
+            android:padding = "5dp"
+            android:text = "Name" />
+
+        <TextView
+            android:layout_width = "0dp"
+            android:layout_height = "wrap_content"
+            android:layout_weight = "2"
+            android:gravity = "center"
+            android:padding = "5dp"
+            android:text = "Games Played" />
+
+        <TextView
+            android:layout_width = "0dp"
+            android:layout_height = "wrap_content"
+            android:layout_weight = "1.5"
+            android:gravity = "center"
+            android:padding = "5dp"
+            android:text = "Success Rate" />
+    </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="70dp">
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+        </ListView>
+
+
+    </LinearLayout>
+</LinearLayout>
