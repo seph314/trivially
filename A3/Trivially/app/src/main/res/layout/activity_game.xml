@@ -6,17 +6,20 @@
 
     <include layout="@layout/navigation_bar"/>
 
+
         <Button
             android:id="@+id/startGameBtn"
             android:layout_width="match_parent"
             android:layout_height="117dp"
-            android:text="Start" />
+            android:text="Start"
+            android:layout_marginHorizontal="10dp"/>
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="10dp">
 
                 <Button
                     android:id="@+id/easyBtn"
@@ -42,6 +45,7 @@
     <ListView
         android:id="@+id/categoriesList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp">
     </ListView>
 </LinearLayout>

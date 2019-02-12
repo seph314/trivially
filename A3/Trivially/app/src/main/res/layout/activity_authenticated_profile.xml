@@ -10,16 +10,21 @@
         android:id="@+id/logOutBtn"
         android:layout_width="match_parent"
         android:layout_height="117dp"
-        android:text="Log out" />
+        android:text="Log out"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="20dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_marginHorizontal="10dp">
 
         <TextView
             android:id="@+id/showScoreText"
             android:layout_width="wrap_content"
             android:layout_height="29dp"
+            android:textColor="@android:color/black"
             android:text="Show my score in high score " />
 
         <Switch

@@ -15,8 +15,9 @@
         android:fontFamily="@font/rashfeng"
         android:textColor="@android:color/black"
         android:text="Your Score" />
+
     <LinearLayout
-        android:id = "@+id/relativeLayout2"
+        android:orientation="horizontal"
         android:layout_width = "fill_parent"
         android:layout_height = "wrap_content"
         android:layout_marginHorizontal="60dp">
