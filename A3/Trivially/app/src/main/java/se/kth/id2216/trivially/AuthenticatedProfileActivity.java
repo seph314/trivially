@@ -30,8 +30,8 @@ public class AuthenticatedProfileActivity extends Activity {
     }
 
     private void setupActivity(){
-        TextView gameButton = (TextView) findViewById(R.id.gameNav);
-        TextView profileButton = (TextView) findViewById(R.id.highScoreNav);
+        TextView gameButton = findViewById(R.id.gameNav);
+        TextView profileButton = findViewById(R.id.highScoreNav);
         gameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,7 +49,7 @@ public class AuthenticatedProfileActivity extends Activity {
             }
         });
 
-        final Button loginButton = (Button) findViewById(R.id.logOutBtn);
+        final Button loginButton = findViewById(R.id.logOutBtn);
         loginButton.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
@@ -62,8 +62,7 @@ public class AuthenticatedProfileActivity extends Activity {
             }
         });
 
-        TextView scoreSwitchText = (TextView) findViewById(R.id.showScoreText);
-        Switch toggle = (Switch) findViewById(R.id.highScoreSwitch);
+        Switch toggle = findViewById(R.id.highScoreSwitch);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {

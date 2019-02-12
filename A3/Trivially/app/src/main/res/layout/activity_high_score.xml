@@ -11,10 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:fontFamily="@font/rashfeng"
         android:textColor="@android:color/black"
-        android:text="Your Score" />
+        android:text="@string/your_score" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -28,7 +28,7 @@
             android:layout_weight = "1"
             android:gravity = "center"
             android:padding = "5dp"
-            android:text = "Name" />
+            android:text = "@string/name" />
 
         <TextView
             android:layout_width = "0dp"
@@ -36,7 +36,7 @@
             android:layout_weight = "2"
             android:gravity = "center"
             android:padding = "5dp"
-            android:text = "Games Played" />
+            android:text = "@string/games_played" />
 
         <TextView
             android:layout_width = "0dp"
@@ -44,7 +44,7 @@
             android:layout_weight = "1.5"
             android:gravity = "center"
             android:padding = "5dp"
-            android:text = "Success Rate" />
+            android:text = "@string/success_rate" />
     </LinearLayout>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -66,10 +66,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:fontFamily="@font/rashfeng"
         android:textColor="@android:color/black"
-        android:text="High Score" />
+        android:text="@string/high_score" />
     <LinearLayout
         android:id = "@+id/relativeLayout1"
         android:layout_width = "fill_parent"
@@ -82,7 +82,7 @@
             android:layout_weight = "1"
             android:gravity = "center"
             android:padding = "5dp"
-            android:text = "Name" />
+            android:text = "@string/name" />
 
         <TextView
             android:layout_width = "0dp"
@@ -90,7 +90,7 @@
             android:layout_weight = "2"
             android:gravity = "center"
             android:padding = "5dp"
-            android:text = "Games Played" />
+            android:text = "@string/games_played" />
 
         <TextView
             android:layout_width = "0dp"
@@ -98,7 +98,7 @@
             android:layout_weight = "1.5"
             android:gravity = "center"
             android:padding = "5dp"
-            android:text = "Success Rate" />
+            android:text = "@string/success_rate" />
     </LinearLayout>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

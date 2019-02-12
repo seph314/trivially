@@ -7,17 +7,12 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HighScoreActivity extends Activity {
 
@@ -33,8 +28,8 @@ public class HighScoreActivity extends Activity {
     }
 
     private void setupActivity(){
-        TextView gameButton = (TextView) findViewById(R.id.gameNav);
-        TextView profileButton = (TextView) findViewById(R.id.profileNav);
+        TextView gameButton = findViewById(R.id.gameNav);
+        TextView profileButton = findViewById(R.id.profileNav);
         gameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,13 +49,13 @@ public class HighScoreActivity extends Activity {
 
         getHighScore();
 
-        ListView personalListView = (ListView) findViewById(R.id.personalScore);
+        ListView personalListView = findViewById(R.id.personalScore);
         ListViewAdapter adapter1 = new ListViewAdapter(this, personalScore);
         personalListView.setAdapter(adapter1);
 
         adapter1.notifyDataSetChanged();
 
-        ListView lview = (ListView) findViewById(R.id.listview);
+        ListView lview = findViewById(R.id.listview);
         ListViewAdapter adapter2 = new ListViewAdapter(this, scores);
         lview.setAdapter(adapter2);
 

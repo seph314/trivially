@@ -25,7 +25,6 @@ public class GameActivity extends AppCompatActivity {
 
     private HashMap<String, Integer> categoriesHM = new HashMap<>();
     private List<String> categoriesList = new ArrayList<>();
-    private int category;
     SharedPreferences sharedPrefs;
 
     @Override
@@ -40,7 +39,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void setupActivity()
     {
-        final Button button = (Button) findViewById(R.id.startGameBtn);
+        final Button button = findViewById(R.id.startGameBtn);
         button.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
@@ -51,8 +50,8 @@ public class GameActivity extends AppCompatActivity {
 
             }
         });
-        TextView highScoreButton = (TextView) findViewById(R.id.highScoreNav);
-        TextView profileButton = (TextView) findViewById(R.id.profileNav);
+        TextView highScoreButton = findViewById(R.id.highScoreNav);
+        TextView profileButton = findViewById(R.id.profileNav);
         highScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,9 +69,9 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        TextView easyBtn = (TextView) findViewById(R.id.easyBtn);
-        TextView normalBtn = (TextView) findViewById(R.id.normalBtn);
-        TextView hardBtn = (TextView) findViewById(R.id.hardBtn);
+        TextView easyBtn = findViewById(R.id.easyBtn);
+        TextView normalBtn = findViewById(R.id.normalBtn);
+        TextView hardBtn = findViewById(R.id.hardBtn);
         easyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,10 +99,10 @@ public class GameActivity extends AppCompatActivity {
 
         getCategories();
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
+        ArrayAdapter adapter = new ArrayAdapter<>(this,
                 R.layout.activity_listview, categoriesList);
 
-        ListView listView = (ListView) findViewById(R.id.categoriesList);
+        ListView listView = findViewById(R.id.categoriesList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

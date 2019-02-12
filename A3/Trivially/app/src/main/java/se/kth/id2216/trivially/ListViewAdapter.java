@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 public class ListViewAdapter extends BaseAdapter {
 
     public String[][] scoreList;
@@ -50,9 +48,9 @@ public class ListViewAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.listview_row, null);
             holder = new ViewHolder();
-            holder.name = (TextView) convertView.findViewById(R.id.nameColumn);
-            holder.gamesPlayed = (TextView) convertView.findViewById(R.id.gamesPlayedColumn);
-            holder.successRate = (TextView) convertView
+            holder.name = convertView.findViewById(R.id.nameColumn);
+            holder.gamesPlayed = convertView.findViewById(R.id.gamesPlayedColumn);
+            holder.successRate = convertView
                     .findViewById(R.id.successRateColumn);
             convertView.setTag(holder);
         } else {

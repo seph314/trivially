@@ -8,8 +8,6 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
 
 public class UnAuthenticatedProfileActivity extends Activity {
@@ -30,8 +28,8 @@ public class UnAuthenticatedProfileActivity extends Activity {
     }
 
     private void setupActivity(){
-        TextView gameButton = (TextView) findViewById(R.id.gameNav);
-        TextView profileButton = (TextView) findViewById(R.id.highScoreNav);
+        TextView gameButton = findViewById(R.id.gameNav);
+        TextView profileButton = findViewById(R.id.highScoreNav);
         gameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,7 +47,7 @@ public class UnAuthenticatedProfileActivity extends Activity {
             }
         });
 
-        final Button loginButton = (Button) findViewById(R.id.logInBtn);
+        final Button loginButton = findViewById(R.id.logInBtn);
         loginButton.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)

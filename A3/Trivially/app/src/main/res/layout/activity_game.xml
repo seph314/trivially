@@ -11,7 +11,7 @@
             android:id="@+id/startGameBtn"
             android:layout_width="match_parent"
             android:layout_height="117dp"
-            android:text="Start"
+            android:text="@string/start"
             android:layout_marginHorizontal="10dp"/>
 
             <LinearLayout
@@ -26,21 +26,21 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Easy" />
+                    android:text="@string/easy" />
 
                 <Button
                     android:id="@+id/normalBtn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Normal" />
+                    android:text="@string/normal" />
 
                 <Button
                     android:id="@+id/hardBtn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Hard" />
+                    android:text="@string/hard" />
             </LinearLayout>
     <ListView
         android:id="@+id/categoriesList"

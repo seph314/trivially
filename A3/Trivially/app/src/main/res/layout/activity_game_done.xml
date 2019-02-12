@@ -4,13 +4,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_marginTop="30dp"
+    android:layout_marginHorizontal="10dp"
     >
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:layout_marginHorizontal="10dp">
 
         <TextView
             android:id="@+id/score"
@@ -35,15 +30,12 @@
             android:layout_width="match_parent"
             android:layout_height="81dp"
             android:layout_gravity="center_horizontal"
-            android:text="Play again" />
+            android:text="@string/play_again" />
 
         <Button
             android:id="@+id/homeBtn"
             android:layout_width="match_parent"
             android:layout_height="88dp"
             android:layout_gravity="center_horizontal"
-            android:text="Home" />
-
-
-    </LinearLayout>
+            android:text="@string/home" />
 </LinearLayout>

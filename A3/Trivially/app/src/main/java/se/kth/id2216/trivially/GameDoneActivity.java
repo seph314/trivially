@@ -26,21 +26,16 @@ public class GameDoneActivity extends Activity {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         score = sharedPrefs.getInt("score",-1);
         numberOfQuestions = sharedPrefs.getInt("questions",-1);
-        String scoreCommentString = "Meh, ur OK.";
-        if(score == numberOfQuestions)
-            scoreCommentString = "Wow, ur really smart!";
-        else if(score > (numberOfQuestions/3) * 2)
-            scoreCommentString = "Ah, ur kind of smart?";
-        else if(score < numberOfQuestions/3)
-            scoreCommentString = "Oh, i bet u were just unlucky.";
 
-        final TextView scoreComment = (TextView) findViewById(R.id.scoreComment);
+        String scoreCommentString = createComment();
+
+        final TextView scoreComment = findViewById(R.id.scoreComment);
         scoreComment.setText(scoreCommentString);
 
-        final TextView scoreText = (TextView) findViewById(R.id.score);
+        final TextView scoreText = findViewById(R.id.score);
         scoreText.setText(String.format("Score %d / %d", score, numberOfQuestions ));
 
-        final Button playAgain = (Button) findViewById(R.id.playAgainBtn);
+        final Button playAgain = findViewById(R.id.playAgainBtn);
         playAgain.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
@@ -52,7 +47,7 @@ public class GameDoneActivity extends Activity {
             }
         });
 
-        final Button quitButton = (Button) findViewById(R.id.homeBtn);
+        final Button quitButton = findViewById(R.id.homeBtn);
         quitButton.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
@@ -60,5 +55,17 @@ public class GameDoneActivity extends Activity {
                 finish();
             }
         });
+    }
+
+    private String createComment(){
+        String scoreCommentString = "Meh, ur OK.";
+        if(score == numberOfQuestions)
+            scoreCommentString = "Wow, ur really smart!";
+        else if(score > (numberOfQuestions/3) * 2)
+            scoreCommentString = "Ah, ur kind of smart?";
+        else if(score < numberOfQuestions/3)
+            scoreCommentString = "Oh, i bet u were just unlucky.";
+
+        return scoreCommentString;
     }
 }

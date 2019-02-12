@@ -1,7 +1,6 @@
 package se.kth.id2216.trivially;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -115,13 +114,13 @@ public class InGameActivity extends Activity {
     }
 
     private void setupActivity(){
-        final  TextView questionHeading = (TextView) findViewById(R.id.questionHeading);
-        final  TextView questionText = (TextView) findViewById(R.id.questionText);
-        final Button quitButton = (Button) findViewById(R.id.quitBtn);
-        final Button guessButton1 = (Button) findViewById(R.id.guessBtn1);
-        final Button guessButton2 = (Button) findViewById(R.id.guessBtn2);
-        final Button guessButton3 = (Button) findViewById(R.id.guessBtn3);
-        final Button guessButton4 = (Button) findViewById(R.id.guessBtn4);
+        final  TextView questionHeading = findViewById(R.id.questionHeading);
+        final  TextView questionText = findViewById(R.id.questionText);
+        final Button quitButton = findViewById(R.id.quitBtn);
+        final Button guessButton1 = findViewById(R.id.guessBtn1);
+        final Button guessButton2 = findViewById(R.id.guessBtn2);
+        final Button guessButton3 = findViewById(R.id.guessBtn3);
+        final Button guessButton4 = findViewById(R.id.guessBtn4);
 
         questionHeading.setText(String.format("Question %d", currentQuestionNumber +1));
         questionText.setText(questions[currentQuestionNumber]);

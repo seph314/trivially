@@ -9,7 +9,7 @@
         android:id="@+id/nameColumn"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:text="Name"
+        android:text="@string/name"
         android:layout_weight="1">
     </TextView>
 
@@ -17,7 +17,7 @@
         android:id="@+id/gamesPlayedColumn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Games Played"
+        android:text="@string/games_played"
         android:layout_weight="2">
     </TextView>
 
@@ -25,7 +25,7 @@
         android:id="@+id/successRateColumn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Success Rate"
+        android:text="@string/success_rate"
         android:layout_weight="1">
     </TextView>
 
