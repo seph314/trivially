@@ -3,10 +3,12 @@ package se.kth.id2216.trivially;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.webkit.HttpAuthHandler;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,6 +19,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +34,8 @@ public class GameActivity extends AppCompatActivity {
     private HashMap<String, Integer> categoriesHM = new HashMap<>();
     private List<String> categoriesList = new ArrayList<>();
     SharedPreferences sharedPrefs;
+    JSONObject categoriesOpenTrivia = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +43,9 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        setupActivity();
+        new getCategoriesFromOpenDB().execute(); // get categories from openTriviaDB by a worker thread (AsyncTask)
+
+        //setupActivity();
     }
 
 
@@ -97,7 +109,7 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        getCategories();
+        //getCategories();
 
         ArrayAdapter adapter = new ArrayAdapter<>(this,
                 R.layout.activity_listview, categoriesList);
@@ -113,6 +125,58 @@ public class GameActivity extends AppCompatActivity {
                 editor.commit();
             }
         });
+    }
+
+    /**
+     * User a worker thread to GET categories from Open Trivia DB
+     */
+    private class getCategoriesFromOpenDB extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            String source = "https://opentdb.com/api_category.php";
+            URLConnection urlConnection;
+            BufferedReader bufferedReader = null;
+            try {
+                URL url = new URL(source);
+                urlConnection = url.openConnection();
+                bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null){
+                    stringBuilder.append(line);
+                }
+                categoriesOpenTrivia = new JSONObject(stringBuilder.toString());
+                System.out.println(categoriesOpenTrivia.toString());
+
+                JSONArray jArray = categoriesOpenTrivia.getJSONArray("trivia_categories");
+                for(int i = 0; i < jArray.length(); i++){
+                    categoriesHM.put(jArray.getJSONObject(i).getString("name"), Integer.valueOf(jArray.getJSONObject(i).getString("id")));
+                    categoriesList.add(jArray.getJSONObject(i).getString("name"));
+                }
+                System.out.println(categoriesList);
+
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            finally {
+                if (bufferedReader != null){
+                    try{
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            setupActivity();
+        }
     }
 
     private void getCategories() {

@@ -3,6 +3,7 @@ package se.kth.id2216.trivially;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -14,6 +15,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class InGameActivity extends Activity {
@@ -22,23 +31,129 @@ public class InGameActivity extends Activity {
     String[] correctAnswers;
     private String[][] incorrectAnswers;
     private String[][] answers;
-    int numberOfQuestions = 3;
+    int numberOfQuestions = 10;
     int currentQuestionNumber = 0;
     private String[] questions;
+    SharedPreferences sharedPrefs;
+    int categoryID;
+    String difficulty;
+    JSONObject questionsFromOpenTrivia = null;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_in_game);
-        try {
+        setSharedPrefs();
+        new getQuestionsFromOpenDB().execute();
+        /*try {
             setVariables();
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
+/*
         setupActivity();
+*/
     }
 
-    private void setVariables() throws JSONException {
+    private void setSharedPrefs(){
+        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        categoryID = sharedPrefs.getInt("category", 0);
+        difficulty = sharedPrefs.getString("difficulty", "");
+        System.out.println("Category ID " + categoryID);
+        System.out.println("Difficulty " + difficulty);
+    }
+
+    private class getQuestionsFromOpenDB extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            String baseURL = "https://opentdb.com/api.php?amount=10";
+            String amountURL = "&category=" + categoryID;
+            String difficultyURL = "&difficulty=" + difficulty;
+            String typeURL = "&type=multiple";
+            String source = baseURL + amountURL + difficultyURL + typeURL;
+            source = "https://opentdb.com/api.php?amount=10&category=11&difficulty=medium&type=multiple";
+
+
+            URLConnection urlConnection;
+            BufferedReader bufferedReader = null;
+            try {
+                URL url = new URL(source);
+                urlConnection = url.openConnection();
+                bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+                questionsFromOpenTrivia = new JSONObject(stringBuilder.toString());
+                System.out.println("Questions " + questionsFromOpenTrivia.toString());
+
+
+
+
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            } finally {
+                if (bufferedReader != null) {
+                    try {
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            incorrectAnswers = new String[numberOfQuestions][3];
+            answers = new String[numberOfQuestions][4];
+            correctAnswers = new String[numberOfQuestions];
+            questions = new String[numberOfQuestions];
+            JSONArray incorrectAnswersJson;
+            JSONArray jArray = null;
+            try {
+                jArray = questionsFromOpenTrivia.getJSONArray("results");
+                for(int i = 0; i < jArray.length(); i++){
+                    questions[i] = jArray.getJSONObject(i).getString("question");
+                    correctAnswers[i] = jArray.getJSONObject(i).getString("correct_answer");
+                    incorrectAnswersJson = new JSONArray(jArray.getJSONObject(i).getString("incorrect_answers"));
+                    for(int j = 0; j < incorrectAnswersJson.length(); j++)
+                        incorrectAnswers[i][j] = incorrectAnswersJson.getString(j);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+
+            int r;
+            int k = 0;
+            for(int i = 0; i < numberOfQuestions; i++){
+                r = ThreadLocalRandom.current().nextInt(0, 3 + 1);
+                k = 0;
+                for(int j = 0; j < 4; j++){
+                    if(r == j){
+                        answers[i][j] = correctAnswers[i];
+                        k = 1;
+                    }
+                    if(answers[i][j] == null)
+                        answers[i][j] = incorrectAnswers[i][j - k];
+                }
+            }
+
+            setupActivity();
+        }
+    }
+
+    /*private void setVariables() throws JSONException {
         JSONObject triviaResponse = new JSONObject(
         "{\n" +
                 "    \"response_code\": 0,\n" +
@@ -111,7 +226,7 @@ public class InGameActivity extends Activity {
             }
         }
 
-    }
+    }*/
 
     private void setupActivity(){
         final  TextView questionHeading = findViewById(R.id.questionHeading);
