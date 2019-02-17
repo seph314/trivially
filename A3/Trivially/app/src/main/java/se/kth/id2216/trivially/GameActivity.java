@@ -96,7 +96,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString("difficulty", "normal");
+                editor.putString("difficulty", "medium");
                 editor.commit();
             }
         });

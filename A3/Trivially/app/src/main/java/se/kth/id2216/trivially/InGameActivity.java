@@ -74,7 +74,9 @@ public class InGameActivity extends Activity {
             String difficultyURL = "&difficulty=" + difficulty;
             String typeURL = "&type=multiple";
             String source = baseURL + amountURL + difficultyURL + typeURL;
-            source = "https://opentdb.com/api.php?amount=10&category=11&difficulty=medium&type=multiple";
+            /*System.out.println("SOURCE " + source);
+            System.out.println("SHOULD " + "https://opentdb.com/api.php?amount=10&category=11&difficulty=medium&type=multiple");
+            source = "https://opentdb.com/api.php?amount=10&category=11&difficulty=medium&type=multiple";*/
 
 
             URLConnection urlConnection;
