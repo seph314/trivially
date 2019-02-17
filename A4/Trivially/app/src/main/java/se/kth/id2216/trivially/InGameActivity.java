@@ -137,7 +137,7 @@ public class InGameActivity extends Activity {
             int r;
             int k = 0;
             for(int i = 0; i < numberOfQuestions; i++){
-                r = ThreadLocalRandom.current().nextInt(0, numberOfQuestions + 1);
+                r = ThreadLocalRandom.current().nextInt(0, 3 + 1);
                 k = 0;
                 for(int j = 0; j < 4; j++){
                     if(r == j){
