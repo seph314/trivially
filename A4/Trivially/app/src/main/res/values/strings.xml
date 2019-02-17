@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Trivially</string>
+    <string name="game">Game</string>
+    <string name="high_score">High Score</string>
+    <string name="profile">Profile</string>
+    <string name="show_score">Show my score in high score</string>
+    <string name="log_out">Log Out</string>
+    <string name="start">Start</string>
+    <string name="easy">Easy</string>
+    <string name="normal">Normal</string>
+    <string name="hard">Hard</string>
+    <string name="play_again">Play again</string>
+    <string name="home">Home</string>
+    <string name="your_score">Your Score</string>
+    <string name="name">Name</string>
+    <string name="games_played">Games Played</string>
+    <string name="success_rate">Success Rate</string>
+    <string name="quit">QUIT</string>
+    <string name="log_in_with_facebook">Log in with Facebook</string>
+</resources>
