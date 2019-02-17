@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/relativeLayout1"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/nameColumn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        android:layout_weight="1">
+    </TextView>
+
+    <TextView
+        android:id="@+id/gamesPlayedColumn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/games_played"
+        android:layout_weight="2">
+    </TextView>
+
+    <TextView
+        android:id="@+id/successRateColumn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/success_rate"
+        android:layout_weight="1">
+    </TextView>
+
+</LinearLayout>
