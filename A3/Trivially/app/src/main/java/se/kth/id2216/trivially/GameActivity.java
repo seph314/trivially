@@ -43,9 +43,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        new getCategoriesFromOpenDB().execute(); // get categories from openTriviaDB by a worker thread (AsyncTask)
-
-        //setupActivity();
+        setupActivity();
     }
 
 
@@ -109,7 +107,7 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        //getCategories();
+        getCategories();
 
         ArrayAdapter adapter = new ArrayAdapter<>(this,
                 R.layout.activity_listview, categoriesList);
@@ -127,57 +125,6 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * User a worker thread to GET categories from Open Trivia DB
-     */
-    private class getCategoriesFromOpenDB extends AsyncTask<Void, Void, Void>{
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            String source = "https://opentdb.com/api_category.php";
-            URLConnection urlConnection;
-            BufferedReader bufferedReader = null;
-            try {
-                URL url = new URL(source);
-                urlConnection = url.openConnection();
-                bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-
-                StringBuilder stringBuilder = new StringBuilder();
-                String line;
-                while ((line = bufferedReader.readLine()) != null){
-                    stringBuilder.append(line);
-                }
-                categoriesOpenTrivia = new JSONObject(stringBuilder.toString());
-                System.out.println(categoriesOpenTrivia.toString());
-
-                JSONArray jArray = categoriesOpenTrivia.getJSONArray("trivia_categories");
-                for(int i = 0; i < jArray.length(); i++){
-                    categoriesHM.put(jArray.getJSONObject(i).getString("name"), Integer.valueOf(jArray.getJSONObject(i).getString("id")));
-                    categoriesList.add(jArray.getJSONObject(i).getString("name"));
-                }
-                System.out.println(categoriesList);
-
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
-            finally {
-                if (bufferedReader != null){
-                    try{
-                        bufferedReader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            setupActivity();
-        }
-    }
 
     private void getCategories() {
         JSONObject triviaResponse = null;
