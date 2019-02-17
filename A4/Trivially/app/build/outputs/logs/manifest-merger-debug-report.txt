@@ -1,0 +1,181 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:1:1-27:12
+INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:1:1-27:12
+INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:1:1-27:12
+INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:1:1-27:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/2e6693ee1d3fae02f2096bc8c068444b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/0cc9ed5d966f5e1a271baa7b898e749c/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/d66c6eb8e995ca03ee2b9c8cc95fd10e/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/45a40962acba8afbfc58bef75d9cd4cd/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/a5b2190b4c87079998b252c5c4d56e1a/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/694f8eaa11baad90ee4f754756b96083/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/06559bbca8d8dd8262f5b92f8d4b2f31/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/a53fc2f0910297ee0f184e3bb16c2103/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/4d2fc33697b1c2726a5cee8af3198ab3/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/f4dc92af6528513667c52d7fea15dc30/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/9fe45e3c51ac93504794597bc7732695/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/fcffffc3e4ef72c696b03d3566fafd96/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/f880b1a324f5ab739acb9302f51df280/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/d870c0a3ed81e5f6c879ef8d470ab2f5/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/02f4faed0d301c444abc88436ce62462/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/567a48d0ec873ca28538e352b2662f92/AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/945deac5cda22440ab058497d5a2dfbd/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/Anders/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/ce681cb1f6029e611b377af41b9e9d37/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/66ceb67edd43a3929d83d6cc27ad4cb4/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/6d5376bff00af1a28e60714bec5d60e1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/f425c66c795b609bb94b100718731211/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/Anders/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/365e0b0cace93fcdb7bb1a6a66ecc42e/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/Anders/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/b795a6e2e4f293839cc9995d56dfec09/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/Anders/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/ecbc7703a91d1419caca3380120b32ce/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /Users/Anders/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/e798807ed3421c457beb77a4ff52b7f9/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/40c98e5303d81168324900c44467fd5c/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:1:1-27:12
+INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:1:1-27:12
+INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:1:1-27:12
+	package
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:2:5-38
+		INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:1:1-27:12
+		INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:1:1-27:12
+		INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:1:11-69
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:4:5-78
+	android:name
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:4:22-76
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:5:5-75
+	android:name
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:5:22-73
+uses-permission#android.permission.INTERNET
+ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:6:5-66
+	android:name
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:6:22-64
+application
+ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:8:5-26:19
+MERGED from [com.android.support:support-compat:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/02f4faed0d301c444abc88436ce62462/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/02f4faed0d301c444abc88436ce62462/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/567a48d0ec873ca28538e352b2662f92/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/567a48d0ec873ca28538e352b2662f92/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/02f4faed0d301c444abc88436ce62462/AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:13:9-35
+	android:label
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:11:9-41
+	android:roundIcon
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:12:9-54
+	android:icon
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:10:9-43
+	android:allowBackup
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:9:9-35
+	android:theme
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:14:9-43
+activity#se.kth.id2216.trivially.GameActivity
+ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:15:9-20:20
+	android:name
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:15:19-47
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:16:13-19:29
+action#android.intent.action.MAIN
+ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:17:17-69
+	android:name
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:17:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:18:17-77
+	android:name
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:18:27-74
+activity#se.kth.id2216.trivially.InGameActivity
+ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:21:9-51
+	android:name
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:21:19-49
+activity#se.kth.id2216.trivially.HighScoreActivity
+ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:22:9-54
+	android:name
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:22:19-52
+activity#se.kth.id2216.trivially.UnAuthenticatedProfileActivity
+ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:23:9-67
+	android:name
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:23:19-65
+activity#se.kth.id2216.trivially.AuthenticatedProfileActivity
+ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:24:9-65
+	android:name
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:24:19-63
+activity#se.kth.id2216.trivially.GameDoneActivity
+ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:25:9-53
+	android:name
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml:25:19-51
+uses-sdk
+INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml
+INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/2e6693ee1d3fae02f2096bc8c068444b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/2e6693ee1d3fae02f2096bc8c068444b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/0cc9ed5d966f5e1a271baa7b898e749c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/0cc9ed5d966f5e1a271baa7b898e749c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/d66c6eb8e995ca03ee2b9c8cc95fd10e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/d66c6eb8e995ca03ee2b9c8cc95fd10e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/45a40962acba8afbfc58bef75d9cd4cd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/45a40962acba8afbfc58bef75d9cd4cd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/a5b2190b4c87079998b252c5c4d56e1a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/a5b2190b4c87079998b252c5c4d56e1a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/694f8eaa11baad90ee4f754756b96083/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/694f8eaa11baad90ee4f754756b96083/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/06559bbca8d8dd8262f5b92f8d4b2f31/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/06559bbca8d8dd8262f5b92f8d4b2f31/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/a53fc2f0910297ee0f184e3bb16c2103/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/a53fc2f0910297ee0f184e3bb16c2103/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/4d2fc33697b1c2726a5cee8af3198ab3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/4d2fc33697b1c2726a5cee8af3198ab3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/f4dc92af6528513667c52d7fea15dc30/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/f4dc92af6528513667c52d7fea15dc30/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/9fe45e3c51ac93504794597bc7732695/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/9fe45e3c51ac93504794597bc7732695/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/fcffffc3e4ef72c696b03d3566fafd96/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/fcffffc3e4ef72c696b03d3566fafd96/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/f880b1a324f5ab739acb9302f51df280/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/f880b1a324f5ab739acb9302f51df280/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/d870c0a3ed81e5f6c879ef8d470ab2f5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/d870c0a3ed81e5f6c879ef8d470ab2f5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/02f4faed0d301c444abc88436ce62462/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/02f4faed0d301c444abc88436ce62462/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/567a48d0ec873ca28538e352b2662f92/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/567a48d0ec873ca28538e352b2662f92/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/945deac5cda22440ab058497d5a2dfbd/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/945deac5cda22440ab058497d5a2dfbd/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/Anders/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/ce681cb1f6029e611b377af41b9e9d37/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/Anders/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/ce681cb1f6029e611b377af41b9e9d37/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/66ceb67edd43a3929d83d6cc27ad4cb4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/66ceb67edd43a3929d83d6cc27ad4cb4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/6d5376bff00af1a28e60714bec5d60e1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/6d5376bff00af1a28e60714bec5d60e1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/f425c66c795b609bb94b100718731211/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/f425c66c795b609bb94b100718731211/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/Anders/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/365e0b0cace93fcdb7bb1a6a66ecc42e/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/Anders/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/365e0b0cace93fcdb7bb1a6a66ecc42e/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/Anders/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/b795a6e2e4f293839cc9995d56dfec09/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/Anders/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/b795a6e2e4f293839cc9995d56dfec09/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/Anders/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/ecbc7703a91d1419caca3380120b32ce/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/Anders/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/ecbc7703a91d1419caca3380120b32ce/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/Anders/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/e798807ed3421c457beb77a4ff52b7f9/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/Anders/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/e798807ed3421c457beb77a4ff52b7f9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/40c98e5303d81168324900c44467fd5c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/Anders/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/40c98e5303d81168324900c44467fd5c/AndroidManifest.xml:20:5-44
+INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml
+INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Anders/KTH Datateknik/Developing Mobile Applications/GitHub/trivially/A3/Trivially/app/src/main/AndroidManifest.xml

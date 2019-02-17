@@ -1,18 +1,14 @@
 package se.kth.id2216.trivially;
 
-
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
 import android.view.View;
-import android.webkit.HttpAuthHandler;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -22,119 +18,65 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
-public class GameActivity extends AppCompatActivity {
+public class InGameActivity extends Activity {
 
-    private HashMap<String, Integer> categoriesHM = new HashMap<>();
-    private List<String> categoriesList = new ArrayList<>();
+    int score = 0;
+    String[] correctAnswers;
+    private String[][] incorrectAnswers;
+    private String[][] answers;
+    int numberOfQuestions = 10;
+    int currentQuestionNumber = 0;
+    private String[] questions;
     SharedPreferences sharedPrefs;
-    JSONObject categoriesOpenTrivia = null;
+    int categoryID;
+    String difficulty;
+    JSONObject questionsFromOpenTrivia = null;
+
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
+        setContentView(R.layout.activity_in_game);
+        setSharedPrefs();
+        new getQuestionsFromOpenDB().execute();
+        /*try {
+            setVariables();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }*/
+/*
+        setupActivity();
+*/
+    }
+
+    private void setSharedPrefs(){
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-
-        new getCategoriesFromOpenDB().execute(); // get categories from openTriviaDB by a worker thread (AsyncTask)
-
-        //setupActivity();
+        categoryID = sharedPrefs.getInt("category", 0);
+        difficulty = sharedPrefs.getString("difficulty", "");
+        System.out.println("Category ID " + categoryID);
+        System.out.println("Difficulty " + difficulty);
     }
 
-
-    private void setupActivity()
-    {
-        final Button button = findViewById(R.id.startGameBtn);
-        button.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(GameActivity.this,
-                        InGameActivity.class);
-                startActivity(intent);
-
-            }
-        });
-        TextView highScoreButton = findViewById(R.id.highScoreNav);
-        TextView profileButton = findViewById(R.id.profileNav);
-        highScoreButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(GameActivity.this,
-                        HighScoreActivity.class);
-                startActivity(intent);
-            }
-        });
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(GameActivity.this,
-                        AuthenticatedProfileActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        TextView easyBtn = findViewById(R.id.easyBtn);
-        TextView normalBtn = findViewById(R.id.normalBtn);
-        TextView hardBtn = findViewById(R.id.hardBtn);
-        easyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString("difficulty", "easy");
-                editor.commit();
-            }
-        });
-        normalBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString("difficulty", "normal");
-                editor.commit();
-            }
-        });
-        hardBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString("difficulty", "hard");
-                editor.commit();
-            }
-        });
-
-        //getCategories();
-
-        ArrayAdapter adapter = new ArrayAdapter<>(this,
-                R.layout.activity_listview, categoriesList);
-
-        ListView listView = findViewById(R.id.categoriesList);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putInt("category", categoriesHM.get(categoriesList.get(position)));
-                editor.commit();
-            }
-        });
-    }
-
-    /**
-     * User a worker thread to GET categories from Open Trivia DB
-     */
-    private class getCategoriesFromOpenDB extends AsyncTask<Void, Void, Void>{
+    private class getQuestionsFromOpenDB extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            String source = "https://opentdb.com/api_category.php";
+            String baseURL = "https://opentdb.com/api.php?amount=10";
+            String amountURL = "&category=" + categoryID;
+            String difficultyURL = "&difficulty=" + difficulty;
+            String typeURL = "&type=multiple";
+            String source = baseURL + amountURL + difficultyURL + typeURL;
+            source = "https://opentdb.com/api.php?amount=10&category=11&difficulty=medium&type=multiple";
+
+
             URLConnection urlConnection;
             BufferedReader bufferedReader = null;
             try {
@@ -144,25 +86,20 @@ public class GameActivity extends AppCompatActivity {
 
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
-                while ((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line);
                 }
-                categoriesOpenTrivia = new JSONObject(stringBuilder.toString());
-                System.out.println(categoriesOpenTrivia.toString());
+                questionsFromOpenTrivia = new JSONObject(stringBuilder.toString());
+                System.out.println("Questions " + questionsFromOpenTrivia.toString());
 
-                JSONArray jArray = categoriesOpenTrivia.getJSONArray("trivia_categories");
-                for(int i = 0; i < jArray.length(); i++){
-                    categoriesHM.put(jArray.getJSONObject(i).getString("name"), Integer.valueOf(jArray.getJSONObject(i).getString("id")));
-                    categoriesList.add(jArray.getJSONObject(i).getString("name"));
-                }
-                System.out.println(categoriesList);
+
+
 
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
-            }
-            finally {
-                if (bufferedReader != null){
-                    try{
+            } finally {
+                if (bufferedReader != null) {
+                    try {
                         bufferedReader.close();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -175,124 +112,191 @@ public class GameActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+
+            incorrectAnswers = new String[numberOfQuestions][3];
+            answers = new String[numberOfQuestions][4];
+            correctAnswers = new String[numberOfQuestions];
+            questions = new String[numberOfQuestions];
+            JSONArray incorrectAnswersJson;
+            JSONArray jArray = null;
+            try {
+                jArray = questionsFromOpenTrivia.getJSONArray("results");
+                for(int i = 0; i < jArray.length(); i++){
+                    questions[i] = jArray.getJSONObject(i).getString("question");
+                    correctAnswers[i] = jArray.getJSONObject(i).getString("correct_answer");
+                    incorrectAnswersJson = new JSONArray(jArray.getJSONObject(i).getString("incorrect_answers"));
+                    for(int j = 0; j < incorrectAnswersJson.length(); j++)
+                        incorrectAnswers[i][j] = incorrectAnswersJson.getString(j);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+
+            int r;
+            int k = 0;
+            for(int i = 0; i < numberOfQuestions; i++){
+                r = ThreadLocalRandom.current().nextInt(0, 3 + 1);
+                k = 0;
+                for(int j = 0; j < 4; j++){
+                    if(r == j){
+                        answers[i][j] = correctAnswers[i];
+                        k = 1;
+                    }
+                    if(answers[i][j] == null)
+                        answers[i][j] = incorrectAnswers[i][j - k];
+                }
+            }
+
             setupActivity();
         }
     }
 
-    private void getCategories() {
-        JSONObject triviaResponse = null;
-        try {
-            triviaResponse = new JSONObject(
-                    "{\n" +
-                            "    \"trivia_categories\": [\n" +
-                            "        {\n" +
-                            "            \"id\": 9,\n" +
-                            "            \"name\": \"General Knowledge\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 10,\n" +
-                            "            \"name\": \"Entertainment: Books\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 11,\n" +
-                            "            \"name\": \"Entertainment: Film\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 12,\n" +
-                            "            \"name\": \"Entertainment: Music\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 13,\n" +
-                            "            \"name\": \"Entertainment: Musicals & Theatres\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 14,\n" +
-                            "            \"name\": \"Entertainment: Television\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 15,\n" +
-                            "            \"name\": \"Entertainment: Video Games\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 16,\n" +
-                            "            \"name\": \"Entertainment: Board Games\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 17,\n" +
-                            "            \"name\": \"Science & Nature\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 18,\n" +
-                            "            \"name\": \"Science: Computers\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 19,\n" +
-                            "            \"name\": \"Science: Mathematics\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 20,\n" +
-                            "            \"name\": \"Mythology\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 21,\n" +
-                            "            \"name\": \"Sports\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 22,\n" +
-                            "            \"name\": \"Geography\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 23,\n" +
-                            "            \"name\": \"History\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 24,\n" +
-                            "            \"name\": \"Politics\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 25,\n" +
-                            "            \"name\": \"Art\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 26,\n" +
-                            "            \"name\": \"Celebrities\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 27,\n" +
-                            "            \"name\": \"Animals\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 28,\n" +
-                            "            \"name\": \"Vehicles\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 29,\n" +
-                            "            \"name\": \"Entertainment: Comics\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 30,\n" +
-                            "            \"name\": \"Science: Gadgets\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 31,\n" +
-                            "            \"name\": \"Entertainment: Japanese Anime & Manga\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 32,\n" +
-                            "            \"name\": \"Entertainment: Cartoon & Animations\"\n" +
-                            "        }\n" +
-                            "    ]\n" +
-                            "}");
+    /*private void setVariables() throws JSONException {
+        JSONObject triviaResponse = new JSONObject(
+        "{\n" +
+                "    \"response_code\": 0,\n" +
+                "    \"results\": [\n" +
+                "        {\n" +
+                "            \"category\": \"History\",\n" +
+                "            \"type\": \"multiple\",\n" +
+                "            \"difficulty\": \"medium\",\n" +
+                "            \"question\": \"When was the United States National Security Agency established?\",\n" +
+                "            \"correct_answer\": \"November 4, 1952\",\n" +
+                "            \"incorrect_answers\": [\n" +
+                "                \"July 26, 1908\",\n" +
+                "                \" July 1, 1973\",\n" +
+                "                \" November 25, 2002\"\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"category\": \"Entertainment: Video Games\",\n" +
+                "            \"type\": \"multiple\",\n" +
+                "            \"difficulty\": \"medium\",\n" +
+                "            \"question\": \"In Terraria, which of these items is NOT crafted at a Mythril Anvil?\",\n" +
+                "            \"correct_answer\": \"Ankh Charm\",\n" +
+                "            \"incorrect_answers\": [\n" +
+                "                \"Venom Staff\",\n" +
+                "                \"Sky Fracture\",\n" +
+                "                \"Orichalcum Tools\"\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"category\": \"General Knowledge\",\n" +
+                "            \"type\": \"multiple\",\n" +
+                "            \"difficulty\": \"medium\",\n" +
+                "            \"question\": \"Where does water from Poland Spring water bottles come from?\",\n" +
+                "            \"correct_answer\": \"Maine, United States\",\n" +
+                "            \"incorrect_answers\": [\n" +
+                "                \"Hesse, Germany\",\n" +
+                "                \"Masovia, Poland\",\n" +
+                "                \"Bavaria, Poland\"\n" +
+                "            ]\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}");
 
-            JSONArray jArray = triviaResponse.getJSONArray("trivia_categories");
-            for(int i = 0; i < jArray.length(); i++){
-                categoriesHM.put(jArray.getJSONObject(i).getString("name"), Integer.valueOf(jArray.getJSONObject(i).getString("id")));
-                categoriesList.add(jArray.getJSONObject(i).getString("name"));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        incorrectAnswers = new String[numberOfQuestions][3];
+        answers = new String[numberOfQuestions][4];
+        correctAnswers = new String[numberOfQuestions];
+        questions = new String[numberOfQuestions];
+        JSONArray incorrectAnswersJson;
+        JSONArray jArray = triviaResponse.getJSONArray("results");
+        for(int i = 0; i < jArray.length(); i++){
+            questions[i] = jArray.getJSONObject(i).getString("question");
+            correctAnswers[i] = jArray.getJSONObject(i).getString("correct_answer");
+            incorrectAnswersJson = new JSONArray(jArray.getJSONObject(i).getString("incorrect_answers"));
+            for(int j = 0; j < incorrectAnswersJson.length(); j++)
+                incorrectAnswers[i][j] = incorrectAnswersJson.getString(j);
         }
+
+        int r;
+        int k = 0;
+        for(int i = 0; i < numberOfQuestions; i++){
+            r = ThreadLocalRandom.current().nextInt(0, 3 + 1);
+            k = 0;
+            for(int j = 0; j < 4; j++){
+                if(r == j){
+                    answers[i][j] = correctAnswers[i];
+                    k = 1;
+                }
+                if(answers[i][j] == null)
+                    answers[i][j] = incorrectAnswers[i][j - k];
+            }
+        }
+
+    }*/
+
+    private void setupActivity(){
+        final  TextView questionHeading = findViewById(R.id.questionHeading);
+        final  TextView questionText = findViewById(R.id.questionText);
+        final Button quitButton = findViewById(R.id.quitBtn);
+        final Button guessButton1 = findViewById(R.id.guessBtn1);
+        final Button guessButton2 = findViewById(R.id.guessBtn2);
+        final Button guessButton3 = findViewById(R.id.guessBtn3);
+        final Button guessButton4 = findViewById(R.id.guessBtn4);
+
+        questionHeading.setText(String.format("Question %d", currentQuestionNumber +1));
+        questionText.setText(questions[currentQuestionNumber]);
+        quitButton.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                finish();
+            }
+        });
+
+        guessButton1.setText(answers[currentQuestionNumber][0]);
+        guessButton1.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                onAnswerChoice(0);
+            }
+        });
+        guessButton2.setText(answers[currentQuestionNumber][1]);
+        guessButton2.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                onAnswerChoice(1);
+            }
+        });
+        guessButton3.setText(answers[currentQuestionNumber][2]);
+        guessButton3.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                onAnswerChoice(2);
+            }
+        });
+        guessButton4.setText(answers[currentQuestionNumber][3]);
+        guessButton4.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                onAnswerChoice(3);
+            }
+        });
     }
 
-
+    private void onAnswerChoice(int answerNumber){
+        if(correctAnswers[currentQuestionNumber].equals(answers[currentQuestionNumber][answerNumber]))
+            score++;
+        if(currentQuestionNumber < numberOfQuestions -1)
+            currentQuestionNumber++;
+        else if(currentQuestionNumber == numberOfQuestions - 1){
+            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = sharedPrefs.edit();
+            editor.putInt("score", score);
+            editor.putInt("questions", numberOfQuestions);
+            editor.commit();
+            Intent intent = new Intent(InGameActivity.this,
+                    GameDoneActivity.class);
+            finish();
+            startActivity(intent);
+        }
+        setupActivity();
+    }
 }
