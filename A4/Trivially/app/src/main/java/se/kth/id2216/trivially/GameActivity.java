@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.webkit.HttpAuthHandler;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,7 +24,6 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -36,18 +37,30 @@ public class GameActivity extends AppCompatActivity {
     SharedPreferences sharedPrefs;
     JSONObject categoriesOpenTrivia = null;
 
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mAuth = FirebaseAuth.getInstance();
 
         new getCategoriesFromOpenDB().execute(); // get categories from openTriviaDB by a worker thread (AsyncTask)
-
-        //setupActivity();
     }
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+    private void updateUI(FirebaseUser currentUser) {
+        System.out.println(currentUser + "is logged in");
+    }
 
     private void setupActivity()
     {
@@ -109,8 +122,6 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        //getCategories();
-
         ArrayAdapter adapter = new ArrayAdapter<>(this,
                 R.layout.activity_listview, categoriesList);
 
@@ -148,14 +159,12 @@ public class GameActivity extends AppCompatActivity {
                     stringBuilder.append(line);
                 }
                 categoriesOpenTrivia = new JSONObject(stringBuilder.toString());
-                System.out.println(categoriesOpenTrivia.toString());
 
                 JSONArray jArray = categoriesOpenTrivia.getJSONArray("trivia_categories");
                 for(int i = 0; i < jArray.length(); i++){
                     categoriesHM.put(jArray.getJSONObject(i).getString("name"), Integer.valueOf(jArray.getJSONObject(i).getString("id")));
                     categoriesList.add(jArray.getJSONObject(i).getString("name"));
                 }
-                System.out.println(categoriesList);
 
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
@@ -178,121 +187,5 @@ public class GameActivity extends AppCompatActivity {
             setupActivity();
         }
     }
-
-    private void getCategories() {
-        JSONObject triviaResponse = null;
-        try {
-            triviaResponse = new JSONObject(
-                    "{\n" +
-                            "    \"trivia_categories\": [\n" +
-                            "        {\n" +
-                            "            \"id\": 9,\n" +
-                            "            \"name\": \"General Knowledge\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 10,\n" +
-                            "            \"name\": \"Entertainment: Books\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 11,\n" +
-                            "            \"name\": \"Entertainment: Film\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 12,\n" +
-                            "            \"name\": \"Entertainment: Music\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 13,\n" +
-                            "            \"name\": \"Entertainment: Musicals & Theatres\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 14,\n" +
-                            "            \"name\": \"Entertainment: Television\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 15,\n" +
-                            "            \"name\": \"Entertainment: Video Games\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 16,\n" +
-                            "            \"name\": \"Entertainment: Board Games\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 17,\n" +
-                            "            \"name\": \"Science & Nature\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 18,\n" +
-                            "            \"name\": \"Science: Computers\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 19,\n" +
-                            "            \"name\": \"Science: Mathematics\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 20,\n" +
-                            "            \"name\": \"Mythology\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 21,\n" +
-                            "            \"name\": \"Sports\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 22,\n" +
-                            "            \"name\": \"Geography\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 23,\n" +
-                            "            \"name\": \"History\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 24,\n" +
-                            "            \"name\": \"Politics\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 25,\n" +
-                            "            \"name\": \"Art\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 26,\n" +
-                            "            \"name\": \"Celebrities\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 27,\n" +
-                            "            \"name\": \"Animals\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 28,\n" +
-                            "            \"name\": \"Vehicles\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 29,\n" +
-                            "            \"name\": \"Entertainment: Comics\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 30,\n" +
-                            "            \"name\": \"Science: Gadgets\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 31,\n" +
-                            "            \"name\": \"Entertainment: Japanese Anime & Manga\"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"id\": 32,\n" +
-                            "            \"name\": \"Entertainment: Cartoon & Animations\"\n" +
-                            "        }\n" +
-                            "    ]\n" +
-                            "}");
-
-            JSONArray jArray = triviaResponse.getJSONArray("trivia_categories");
-            for(int i = 0; i < jArray.length(); i++){
-                categoriesHM.put(jArray.getJSONObject(i).getString("name"), Integer.valueOf(jArray.getJSONObject(i).getString("id")));
-                categoriesList.add(jArray.getJSONObject(i).getString("name"));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
 
 }

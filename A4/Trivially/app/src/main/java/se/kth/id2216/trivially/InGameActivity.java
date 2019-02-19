@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,30 +42,21 @@ public class InGameActivity extends Activity {
     JSONObject questionsFromOpenTrivia = null;
 
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_in_game);
         setSharedPrefs();
         new getQuestionsFromOpenDB().execute();
-        /*try {
-            setVariables();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
-/*
-        setupActivity();
-*/
     }
+
 
     private void setSharedPrefs(){
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         categoryID = sharedPrefs.getInt("category", 0);
         difficulty = sharedPrefs.getString("difficulty", "");
-        System.out.println("Category ID " + categoryID);
-        System.out.println("Difficulty " + difficulty);
     }
+
 
     private class getQuestionsFromOpenDB extends AsyncTask<Void, Void, Void> {
 
@@ -74,27 +67,54 @@ public class InGameActivity extends Activity {
             String difficultyURL = "&difficulty=" + difficulty;
             String typeURL = "&type=multiple";
             String source = baseURL + amountURL + difficultyURL + typeURL;
-            /*System.out.println("SOURCE " + source);
-            System.out.println("SHOULD " + "https://opentdb.com/api.php?amount=10&category=11&difficulty=medium&type=multiple");
-            source = "https://opentdb.com/api.php?amount=10&category=11&difficulty=medium&type=multiple";*/
-
 
             URLConnection urlConnection;
             BufferedReader bufferedReader = null;
             try {
                 URL url = new URL(source);
                 urlConnection = url.openConnection();
-                bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
 
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
                 while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line);
                 }
+
                 questionsFromOpenTrivia = new JSONObject(stringBuilder.toString());
                 System.out.println("Questions " + questionsFromOpenTrivia.toString());
 
 
+                incorrectAnswers = new String[numberOfQuestions][3];
+                answers = new String[numberOfQuestions][4];
+                correctAnswers = new String[numberOfQuestions];
+                questions = new String[numberOfQuestions];
+                JSONArray incorrectAnswersJson;
+                JSONArray jArray = null;
+
+                jArray = questionsFromOpenTrivia.getJSONArray("results");
+                for(int i = 0; i < jArray.length(); i++){
+                    questions[i] = jArray.getJSONObject(i).getString("question");
+                    correctAnswers[i] = jArray.getJSONObject(i).getString("correct_answer");
+                    incorrectAnswersJson = new JSONArray(jArray.getJSONObject(i).getString("incorrect_answers"));
+                    for(int j = 0; j < incorrectAnswersJson.length(); j++)
+                        incorrectAnswers[i][j] = incorrectAnswersJson.getString(j);
+                }
+
+                int r;
+                int k = 0;
+                for(int i = 0; i < numberOfQuestions; i++){
+                    r = ThreadLocalRandom.current().nextInt(0, 3 + 1);
+                    k = 0;
+                    for(int j = 0; j < 4; j++){
+                        if(r == j){
+                            answers[i][j] = correctAnswers[i];
+                            k = 1;
+                        }
+                        if(answers[i][j] == null)
+                            answers[i][j] = incorrectAnswers[i][j - k];
+                    }
+                }
 
 
             } catch (IOException | JSONException e) {
@@ -114,121 +134,10 @@ public class InGameActivity extends Activity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-
-            incorrectAnswers = new String[numberOfQuestions][3];
-            answers = new String[numberOfQuestions][4];
-            correctAnswers = new String[numberOfQuestions];
-            questions = new String[numberOfQuestions];
-            JSONArray incorrectAnswersJson;
-            JSONArray jArray = null;
-            try {
-                jArray = questionsFromOpenTrivia.getJSONArray("results");
-                for(int i = 0; i < jArray.length(); i++){
-                    questions[i] = jArray.getJSONObject(i).getString("question");
-                    correctAnswers[i] = jArray.getJSONObject(i).getString("correct_answer");
-                    incorrectAnswersJson = new JSONArray(jArray.getJSONObject(i).getString("incorrect_answers"));
-                    for(int j = 0; j < incorrectAnswersJson.length(); j++)
-                        incorrectAnswers[i][j] = incorrectAnswersJson.getString(j);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
-
-            int r;
-            int k = 0;
-            for(int i = 0; i < numberOfQuestions; i++){
-                r = ThreadLocalRandom.current().nextInt(0, 3 + 1);
-                k = 0;
-                for(int j = 0; j < 4; j++){
-                    if(r == j){
-                        answers[i][j] = correctAnswers[i];
-                        k = 1;
-                    }
-                    if(answers[i][j] == null)
-                        answers[i][j] = incorrectAnswers[i][j - k];
-                }
-            }
-
             setupActivity();
         }
     }
 
-    /*private void setVariables() throws JSONException {
-        JSONObject triviaResponse = new JSONObject(
-        "{\n" +
-                "    \"response_code\": 0,\n" +
-                "    \"results\": [\n" +
-                "        {\n" +
-                "            \"category\": \"History\",\n" +
-                "            \"type\": \"multiple\",\n" +
-                "            \"difficulty\": \"medium\",\n" +
-                "            \"question\": \"When was the United States National Security Agency established?\",\n" +
-                "            \"correct_answer\": \"November 4, 1952\",\n" +
-                "            \"incorrect_answers\": [\n" +
-                "                \"July 26, 1908\",\n" +
-                "                \" July 1, 1973\",\n" +
-                "                \" November 25, 2002\"\n" +
-                "            ]\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"category\": \"Entertainment: Video Games\",\n" +
-                "            \"type\": \"multiple\",\n" +
-                "            \"difficulty\": \"medium\",\n" +
-                "            \"question\": \"In Terraria, which of these items is NOT crafted at a Mythril Anvil?\",\n" +
-                "            \"correct_answer\": \"Ankh Charm\",\n" +
-                "            \"incorrect_answers\": [\n" +
-                "                \"Venom Staff\",\n" +
-                "                \"Sky Fracture\",\n" +
-                "                \"Orichalcum Tools\"\n" +
-                "            ]\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"category\": \"General Knowledge\",\n" +
-                "            \"type\": \"multiple\",\n" +
-                "            \"difficulty\": \"medium\",\n" +
-                "            \"question\": \"Where does water from Poland Spring water bottles come from?\",\n" +
-                "            \"correct_answer\": \"Maine, United States\",\n" +
-                "            \"incorrect_answers\": [\n" +
-                "                \"Hesse, Germany\",\n" +
-                "                \"Masovia, Poland\",\n" +
-                "                \"Bavaria, Poland\"\n" +
-                "            ]\n" +
-                "        }\n" +
-                "    ]\n" +
-                "}");
-
-        incorrectAnswers = new String[numberOfQuestions][3];
-        answers = new String[numberOfQuestions][4];
-        correctAnswers = new String[numberOfQuestions];
-        questions = new String[numberOfQuestions];
-        JSONArray incorrectAnswersJson;
-        JSONArray jArray = triviaResponse.getJSONArray("results");
-        for(int i = 0; i < jArray.length(); i++){
-            questions[i] = jArray.getJSONObject(i).getString("question");
-            correctAnswers[i] = jArray.getJSONObject(i).getString("correct_answer");
-            incorrectAnswersJson = new JSONArray(jArray.getJSONObject(i).getString("incorrect_answers"));
-            for(int j = 0; j < incorrectAnswersJson.length(); j++)
-                incorrectAnswers[i][j] = incorrectAnswersJson.getString(j);
-        }
-
-        int r;
-        int k = 0;
-        for(int i = 0; i < numberOfQuestions; i++){
-            r = ThreadLocalRandom.current().nextInt(0, 3 + 1);
-            k = 0;
-            for(int j = 0; j < 4; j++){
-                if(r == j){
-                    answers[i][j] = correctAnswers[i];
-                    k = 1;
-                }
-                if(answers[i][j] == null)
-                    answers[i][j] = incorrectAnswers[i][j - k];
-            }
-        }
-
-    }*/
 
     private void setupActivity(){
         final  TextView questionHeading = findViewById(R.id.questionHeading);
@@ -282,6 +191,7 @@ public class InGameActivity extends Activity {
             }
         });
     }
+
 
     private void onAnswerChoice(int answerNumber){
         if(correctAnswers[currentQuestionNumber].equals(answers[currentQuestionNumber][answerNumber]))
