@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "593125228271",
+    "firebase_url": "https://trivially-87dca.firebaseio.com",
+    "project_id": "trivially-87dca",
+    "storage_bucket": "trivially-87dca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593125228271:android:87a0567cd4328220",
+        "android_client_info": {
+          "package_name": "se.kth.id2216.trivially"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593125228271-ca2cqnqvdh9eosmdd6rmpoq4atnmmhk2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "se.kth.id2216.trivially",
+            "certificate_hash": "50ea3b5c027c7ac26c6ca95680590d664e68e24a"
+          }
+        },
+        {
+          "client_id": "593125228271-d4od185fskksu8gusg830lsjkc493j42.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAh-D7GJv6bZ_LMyYBWiV8g_l3pu5We37U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "593125228271-d4od185fskksu8gusg830lsjkc493j42.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
