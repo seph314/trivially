@@ -61,12 +61,12 @@ public class UnAuthenticatedProfileActivity extends Activity implements View.OnC
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.client_id)) //from Google API and our keystore
+                .requestIdToken(getString(R.string.default_web_client_id)) //from Google API and our keystore
                 .requestEmail()
                 .build();
 
         // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        mGoogleSignInClient = GoogleSignIn.getClient(UnAuthenticatedProfileActivity.this, gso);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -117,6 +117,7 @@ public class UnAuthenticatedProfileActivity extends Activity implements View.OnC
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -155,6 +156,7 @@ public class UnAuthenticatedProfileActivity extends Activity implements View.OnC
                     }
                 });
     }
+
 
     @Override
     public void onClick(View v) {
