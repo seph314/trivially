@@ -14,6 +14,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AuthenticatedProfileActivity extends Activity implements View.OnClickListener {
 
@@ -21,11 +27,32 @@ public class AuthenticatedProfileActivity extends Activity implements View.OnCli
 
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference mRootRef;
+    private DatabaseReference mPlayersRef;
+    private FirebaseUser currentUser;
+    private boolean visibleInHighScore = false;
+    Switch toggle;
 
     @Override
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
+        currentUser = mAuth.getCurrentUser();
+        if (currentUser != null)
+            mPlayersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    visibleInHighScore = dataSnapshot.child(currentUser.getUid()).child("visible").getValue(Boolean.class);
+                    if(visibleInHighScore)
+                        toggle.setChecked(true);
+                    else
+                        toggle.setChecked(false);
+
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
     }
 
     @Override
@@ -33,6 +60,8 @@ public class AuthenticatedProfileActivity extends Activity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authenticated_profile);
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mRootRef = FirebaseDatabase.getInstance().getReference();
+        mPlayersRef = mRootRef.child("players");
 
         // define logout button
         findViewById(R.id.logOutBtn).setOnClickListener(this);
@@ -84,17 +113,13 @@ public class AuthenticatedProfileActivity extends Activity implements View.OnCli
             }
         });*/
 
-        Switch toggle = findViewById(R.id.highScoreSwitch);
+        toggle = findViewById(R.id.highScoreSwitch);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    SharedPreferences.Editor editor = sharedPrefs.edit();
-                    editor.putBoolean("showScore", true);
-                    editor.commit();
+                    mPlayersRef.child(currentUser.getUid()).child("visible").setValue(true);
                 } else {
-                    SharedPreferences.Editor editor = sharedPrefs.edit();
-                    editor.putBoolean("showScore", false);
-                    editor.commit();
+                    mPlayersRef.child(currentUser.getUid()).child("visible").setValue(false);
                 }
             }
         });
@@ -115,5 +140,6 @@ public class AuthenticatedProfileActivity extends Activity implements View.OnCli
             mAuth.signOut();
         }
     }
+
 
 }

@@ -3,6 +3,9 @@ package se.kth.id2216.trivially;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -40,6 +43,7 @@ public class InGameActivity extends Activity {
     int categoryID;
     String difficulty;
     JSONObject questionsFromOpenTrivia = null;
+    List<Button> answerButtons = new ArrayList<>();
 
 
     @Override
@@ -140,13 +144,18 @@ public class InGameActivity extends Activity {
 
 
     private void setupActivity(){
-        final  TextView questionHeading = findViewById(R.id.questionHeading);
-        final  TextView questionText = findViewById(R.id.questionText);
-        final Button quitButton = findViewById(R.id.quitBtn);
-        final Button guessButton1 = findViewById(R.id.guessBtn1);
-        final Button guessButton2 = findViewById(R.id.guessBtn2);
-        final Button guessButton3 = findViewById(R.id.guessBtn3);
-        final Button guessButton4 = findViewById(R.id.guessBtn4);
+         TextView questionHeading = findViewById(R.id.questionHeading);
+         TextView questionText = findViewById(R.id.questionText);
+        Button quitButton = findViewById(R.id.quitBtn);
+        Button guessButton1 = findViewById(R.id.guessBtn1);
+        Button guessButton2 = findViewById(R.id.guessBtn2);
+        Button guessButton3 = findViewById(R.id.guessBtn3);
+        Button guessButton4 = findViewById(R.id.guessBtn4);
+
+        answerButtons.add(guessButton1);
+        answerButtons.add(guessButton2);
+        answerButtons.add(guessButton3);
+        answerButtons.add(guessButton4);
 
         questionHeading.setText(String.format("Question %d", currentQuestionNumber +1));
         questionText.setText(questions[currentQuestionNumber]);
@@ -194,8 +203,19 @@ public class InGameActivity extends Activity {
 
 
     private void onAnswerChoice(int answerNumber){
-        if(correctAnswers[currentQuestionNumber].equals(answers[currentQuestionNumber][answerNumber]))
+        if(correctAnswers[currentQuestionNumber].equals(answers[currentQuestionNumber][answerNumber])) {
             score++;
+//            Drawable defaultColor = answerButtons.get(answerNumber-1).getBackground();
+//            answerButtons.get(answerNumber-1).setBackgroundColor(Color.parseColor("#FF6347"));
+//            setupActivity();
+//            try {
+//                Thread.sleep(500);
+//
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
+//            answerButtons.get(answerNumber-1).setBackground(defaultColor);
+        }
         if(currentQuestionNumber < numberOfQuestions -1)
             currentQuestionNumber++;
         else if(currentQuestionNumber == numberOfQuestions - 1){

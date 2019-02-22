@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +17,11 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,8 +60,27 @@ public class GameActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        final FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
+        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+        final DatabaseReference mPlayersRef = mRootRef.child("players");
+
+        mPlayersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (currentUser != null && !dataSnapshot.hasChild(currentUser.getUid())) {
+                    mPlayersRef.push().setValue(currentUser.getUid());
+                    mPlayersRef.child(currentUser.getUid()).child("alias").setValue("oolong_ocean");
+                    mPlayersRef.child(currentUser.getUid()).child("score").setValue(0L);
+                    mPlayersRef.child(currentUser.getUid()).child("gamesPlayed").setValue(0L);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void updateUI(FirebaseUser currentUser) {
