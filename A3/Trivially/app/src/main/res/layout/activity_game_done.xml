@@ -5,6 +5,7 @@
     android:layout_height="fill_parent"
     android:layout_marginTop="30dp"
     android:layout_marginHorizontal="10dp"
+    android:background="#0073e6"
     >
 
         <TextView
@@ -30,6 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="81dp"
             android:layout_gravity="center_horizontal"
+            android:background="#004d99"
+	    android:textColor="#4da6ff"
             android:text="@string/play_again" />
 
         <Button
@@ -37,5 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="88dp"
             android:layout_gravity="center_horizontal"
+	    android:background="#004d99"
+	    android:textColor="#4da6ff"
             android:text="@string/home" />
 </LinearLayout>

@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="#0073e6">
+
 
     <include layout="@layout/navigation_bar"/>
 
@@ -12,6 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="117dp"
             android:text="@string/start"
+            android:background="#004d99"
+	    android:textColor="#4da6ff"
             android:layout_marginHorizontal="10dp"/>
 
             <LinearLayout
@@ -26,6 +30,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+		    android:background="#004d99"
+	            android:textColor="#4da6ff"
                     android:text="@string/easy" />
 
                 <Button
@@ -33,6 +39,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+ 		    android:background="#004d99"
+	            android:textColor="#4da6ff"
                     android:text="@string/normal" />
 
                 <Button
@@ -40,6 +48,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+ 		    android:background="#004d99"
+	            android:textColor="#4da6ff"
                     android:text="@string/hard" />
             </LinearLayout>
     <ListView

@@ -3,13 +3,16 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_marginHorizontal="10dp">
+    android:layout_marginHorizontal="10dp"
+    android:background="#0073e6">
 
         <Button
             android:id="@+id/quitBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:textColor="#4da6ff"
+	    android:background="#004d99"      
             android:text="@string/quit" />
 
         <TextView
@@ -36,24 +39,32 @@
             android:layout_width="match_parent"
             android:layout_height="81dp"
             android:layout_gravity="center_horizontal"
+	    android:background="#004d99"
+	    android:textColor="#4da6ff"
             />
         <Button
             android:id="@+id/guessBtn2"
             android:layout_width="match_parent"
             android:layout_height="81dp"
             android:layout_gravity="center_horizontal"
+	    android:background="#004d99"
+	    android:textColor="#4da6ff"
             />
         <Button
             android:id="@+id/guessBtn3"
             android:layout_width="match_parent"
             android:layout_height="81dp"
             android:layout_gravity="center_horizontal"
+	    android:background="#004d99"
+	    android:textColor="#4da6ff"
             />
         <Button
             android:id="@+id/guessBtn4"
             android:layout_width="match_parent"
             android:layout_height="81dp"
             android:layout_gravity="center_horizontal"
+	    android:background="#004d99"
+	    android:textColor="#4da6ff"
             />
 
 </LinearLayout>
