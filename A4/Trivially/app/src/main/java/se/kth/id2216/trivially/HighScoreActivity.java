@@ -68,55 +68,6 @@ public class HighScoreActivity extends Activity {
 
     }
 
-    private void getHighScore() {
-        JSONObject triviaResponse = null;
-        try {
-            triviaResponse = new JSONObject(
-                    "{\n" +
-                            "    \"score\": [\n" +
-                            "        {\n" +
-                            "            \"name\": \"John Doe\",\n" +
-                            "            \"gamesPlayed\": 7777,\n" +
-                            "            \"successRate\": 95.00\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"name\": \"McAffee\",\n" +
-                            "            \"gamesPlayed\": 314,\n" +
-                            "            \"successRate\": 59.00\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"name\": \"Norton\",\n" +
-                            "            \"gamesPlayed\": 200,\n" +
-                            "            \"successRate\": 20.22\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"name\": \"Cranky Sloth\",\n" +
-                            "            \"gamesPlayed\": 10000,\n" +
-                            "            \"successRate\": 0.04\n" +
-                            "        }\n" +
-                            "    ]\n" +
-                            "}");
-
-            JSONArray jArray = triviaResponse.getJSONArray("score");
-            scores = new String[jArray.length()][3];
-            for(int i = 0; i < jArray.length(); i++){
-                scores[i][0] = jArray.getJSONObject(i).getString("name");
-                scores[i][1] = String.valueOf(jArray.getJSONObject(i).getInt("gamesPlayed"));
-                scores[i][2] = jArray.getJSONObject(i).getString("score");
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        personalScore = new String[1][3];
-        personalScore[0] =
-                new String[]{
-                        "John Doe", "7777", "95.00%"
-                };
-
-
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
