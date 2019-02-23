@@ -22,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -84,7 +85,7 @@ public class HighScoreActivity extends Activity {
                             scores[i][0] = snapshot.child("alias").getValue(String.class);
                             scores[i][1] = String.valueOf(snapshot.child("gamesPlayed").getValue(Long.class));
                             if (Long.parseLong(scores[i][1]) != 0)
-                                scores[i][2] = String.valueOf(snapshot.child("score").getValue(Long.class) / Long.parseLong(scores[i][1]) * 10);
+                                scores[i][2] = divideLong(snapshot.child("score").getValue(Long.class), Long.parseLong(scores[i][1]));
                             else
                                 scores[i][2] = "0";
                         }
@@ -98,7 +99,7 @@ public class HighScoreActivity extends Activity {
                     personalScore[0][0] = dataSnapshot.child(currentFirebaseUser.getUid()).child("alias").getValue(String.class);
                     personalScore[0][1] = String.valueOf(dataSnapshot.child(currentFirebaseUser.getUid()).child("gamesPlayed").getValue(Long.class));
                     if(Long.parseLong(personalScore[0][1]) != 0)
-                        personalScore[0][2] = String.valueOf(dataSnapshot.child(currentFirebaseUser.getUid()).child("score").getValue(Long.class)/Long.parseLong(personalScore[0][1]) * 10);
+                        personalScore[0][2] = divideLong(dataSnapshot.child(currentFirebaseUser.getUid()).child("score").getValue(Long.class), Long.parseLong(personalScore[0][1]));
                     else
                         personalScore[0][2] = "0";
 
@@ -114,12 +115,12 @@ public class HighScoreActivity extends Activity {
         String[] temp;
         for (int i = 0; i < scores.length - 1; i++) {
             for (int j = i + 1; j < scores.length; j++) {
-                if (Long.parseLong(scores[i][2]) < Long.parseLong(scores[j][2])) {
+                if (Double.parseDouble(scores[i][2]) < Double.parseDouble(scores[j][2])) {
                     temp = scores[j];
                     scores[j] = scores[i];
                     scores[i] = temp;
                 }
-                else if (Long.parseLong(scores[i][2]) == Long.parseLong(scores[j][2]) && Long.parseLong(scores[i][1]) < Long.parseLong(scores[j][1])) {
+                else if (Double.parseDouble(scores[i][2]) == Double.parseDouble(scores[j][2]) && Long.parseLong(scores[i][1]) < Long.parseLong(scores[j][1])) {
                     temp = scores[j];
                     scores[j] = scores[i];
                     scores[i] = temp;
@@ -158,5 +159,12 @@ public class HighScoreActivity extends Activity {
         lview.setAdapter(adapter2);
 
         adapter2.notifyDataSetChanged();
+    }
+
+    private String divideLong(Long numerator, Long denominator){
+
+        double result = ((double) numerator / ((double) denominator * 10.00)) * 100;
+        DecimalFormat numberFormat = new DecimalFormat("#.00");
+        return numberFormat.format(result);
     }
 }
