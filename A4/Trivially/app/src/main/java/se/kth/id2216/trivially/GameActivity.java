@@ -3,6 +3,8 @@ package se.kth.id2216.trivially;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -70,7 +72,7 @@ public class GameActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (currentUser != null && !dataSnapshot.hasChild(currentUser.getUid())) {
                     mPlayersRef.push().setValue(currentUser.getUid());
-                    mPlayersRef.child(currentUser.getUid()).child("alias").setValue("oolong_ocean");
+                    mPlayersRef.child(currentUser.getUid()).child("alias").setValue("anonymous_user");
                     mPlayersRef.child(currentUser.getUid()).child("score").setValue(0L);
                     mPlayersRef.child(currentUser.getUid()).child("gamesPlayed").setValue(0L);
                 }
@@ -119,15 +121,19 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        TextView easyBtn = findViewById(R.id.easyBtn);
-        TextView normalBtn = findViewById(R.id.normalBtn);
-        TextView hardBtn = findViewById(R.id.hardBtn);
+        final Drawable defaultColor = findViewById(R.id.easyBtn).getBackground();
+        final TextView easyBtn = findViewById(R.id.easyBtn);
+        final TextView normalBtn = findViewById(R.id.normalBtn);
+        final TextView hardBtn = findViewById(R.id.hardBtn);
         easyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SharedPreferences.Editor editor = sharedPrefs.edit();
                 editor.putString("difficulty", "easy");
                 editor.commit();
+                easyBtn.setBackgroundResource(R.drawable.back_chosen);
+                normalBtn.setBackground(defaultColor);
+                hardBtn.setBackground(defaultColor);
             }
         });
         normalBtn.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +142,9 @@ public class GameActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPrefs.edit();
                 editor.putString("difficulty", "medium");
                 editor.commit();
+                easyBtn.setBackground(defaultColor);
+                normalBtn.setBackgroundResource(R.drawable.back_chosen);
+                hardBtn.setBackground(defaultColor);
             }
         });
         hardBtn.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +153,9 @@ public class GameActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPrefs.edit();
                 editor.putString("difficulty", "hard");
                 editor.commit();
+                easyBtn.setBackground(defaultColor);
+                normalBtn.setBackground(defaultColor);
+                hardBtn.setBackgroundResource(R.drawable.back_chosen);
             }
         });
 
@@ -156,6 +168,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
+                view.setSelected(true);
                 SharedPreferences.Editor editor = sharedPrefs.edit();
                 editor.putInt("category", categoriesHM.get(categoriesList.get(position)));
                 editor.commit();

@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ public class AuthenticatedProfileActivity extends Activity implements View.OnCli
     private FirebaseUser currentUser;
     private boolean visibleInHighScore = false;
     Switch toggle;
+    String alias;
 
     @Override
     protected void onStart() {
@@ -39,7 +41,7 @@ public class AuthenticatedProfileActivity extends Activity implements View.OnCli
         mAuth.addAuthStateListener(mAuthListener);
         currentUser = mAuth.getCurrentUser();
         if (currentUser != null)
-            mPlayersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            mPlayersRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     visibleInHighScore = dataSnapshot.child(currentUser.getUid()).child("visible").getValue(Boolean.class);
@@ -47,6 +49,10 @@ public class AuthenticatedProfileActivity extends Activity implements View.OnCli
                         toggle.setChecked(true);
                     else
                         toggle.setChecked(false);
+                    alias = dataSnapshot.child(currentUser.getUid()).child("alias").getValue(String.class);
+                    TextView aliasText = findViewById(R.id.currentAlias);
+                    aliasText.setText(String.valueOf("Current alias: "+ alias));
+
 
                 }
                 @Override
@@ -100,18 +106,6 @@ public class AuthenticatedProfileActivity extends Activity implements View.OnCli
             }
         });
 
-        /*final Button loginButton = findViewById(R.id.logOutBtn);
-        loginButton.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString("token", "");
-                editor.putBoolean("authenticated", false);
-                editor.commit();
-                redirectToUnAuthenticatedProfile();
-            }
-        });*/
 
         toggle = findViewById(R.id.highScoreSwitch);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -123,6 +117,17 @@ public class AuthenticatedProfileActivity extends Activity implements View.OnCli
                 }
             }
         });
+
+        Button submitAlias = findViewById(R.id.submitAlias);
+        submitAlias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText pickAlias = findViewById(R.id.pickAlias);
+                String alias = pickAlias.getText().toString();
+                mPlayersRef.child(currentUser.getUid()).child("alias").setValue(alias);
+            }
+        });
+
 
     }
 
