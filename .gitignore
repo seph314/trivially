@@ -3,3 +3,10 @@
 *.DS_Store
 **/.DS_Store
 js/ingame/
+A4/Trivially/local.properties
+A4/Trivially/app/google-services.json
+A4/Trivially/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+A4/Trivially/.gradle/buildOutputCleanup/outputFiles.bin
+A4/Trivially/Trivially.iml
+A4/Trivially/app/app.iml
+A4/Trivially/app/google-services.json

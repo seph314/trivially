@@ -21,6 +21,16 @@
             android:fontFamily="@font/rashfeng"
             android:textColor="@android:color/black"/>
 
+        <TextView
+            android:id="@+id/scoreText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="end"
+            android:textSize="30sp"
+            android:fontFamily="@font/rashfeng"
+            android:textColor="@android:color/black"/>
+
 
         <TextView
             android:id="@+id/questionText"
@@ -36,24 +46,32 @@
             android:layout_width="match_parent"
             android:layout_height="81dp"
             android:layout_gravity="center_horizontal"
+            android:background="@drawable/back"
+            android:layout_marginVertical="1dp"
             />
         <Button
             android:id="@+id/guessBtn2"
             android:layout_width="match_parent"
             android:layout_height="81dp"
             android:layout_gravity="center_horizontal"
+            android:background="@drawable/back"
+            android:layout_marginVertical="1dp"
             />
         <Button
             android:id="@+id/guessBtn3"
             android:layout_width="match_parent"
             android:layout_height="81dp"
             android:layout_gravity="center_horizontal"
+            android:background="@drawable/back"
+            android:layout_marginVertical="1dp"
             />
         <Button
             android:id="@+id/guessBtn4"
             android:layout_width="match_parent"
             android:layout_height="81dp"
             android:layout_gravity="center_horizontal"
+            android:background="@drawable/back"
+            android:layout_marginVertical="1dp"
             />
 
 </LinearLayout>

@@ -3,9 +3,12 @@ package se.kth.id2216.trivially;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +19,11 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,8 +62,27 @@ public class GameActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        final FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
+        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+        final DatabaseReference mPlayersRef = mRootRef.child("players");
+
+        mPlayersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (currentUser != null && !dataSnapshot.hasChild(currentUser.getUid())) {
+                    mPlayersRef.push().setValue(currentUser.getUid());
+                    mPlayersRef.child(currentUser.getUid()).child("alias").setValue("anonymous_user");
+                    mPlayersRef.child(currentUser.getUid()).child("score").setValue(0L);
+                    mPlayersRef.child(currentUser.getUid()).child("gamesPlayed").setValue(0L);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void updateUI(FirebaseUser currentUser) {
@@ -94,15 +121,19 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        TextView easyBtn = findViewById(R.id.easyBtn);
-        TextView normalBtn = findViewById(R.id.normalBtn);
-        TextView hardBtn = findViewById(R.id.hardBtn);
+        final Drawable defaultColor = findViewById(R.id.easyBtn).getBackground();
+        final TextView easyBtn = findViewById(R.id.easyBtn);
+        final TextView normalBtn = findViewById(R.id.normalBtn);
+        final TextView hardBtn = findViewById(R.id.hardBtn);
         easyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SharedPreferences.Editor editor = sharedPrefs.edit();
                 editor.putString("difficulty", "easy");
                 editor.commit();
+                easyBtn.setBackgroundResource(R.drawable.back_chosen);
+                normalBtn.setBackground(defaultColor);
+                hardBtn.setBackground(defaultColor);
             }
         });
         normalBtn.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +142,9 @@ public class GameActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPrefs.edit();
                 editor.putString("difficulty", "medium");
                 editor.commit();
+                easyBtn.setBackground(defaultColor);
+                normalBtn.setBackgroundResource(R.drawable.back_chosen);
+                hardBtn.setBackground(defaultColor);
             }
         });
         hardBtn.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +153,9 @@ public class GameActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPrefs.edit();
                 editor.putString("difficulty", "hard");
                 editor.commit();
+                easyBtn.setBackground(defaultColor);
+                normalBtn.setBackground(defaultColor);
+                hardBtn.setBackgroundResource(R.drawable.back_chosen);
             }
         });
 
@@ -131,6 +168,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
+                view.setSelected(true);
                 SharedPreferences.Editor editor = sharedPrefs.edit();
                 editor.putInt("category", categoriesHM.get(categoriesList.get(position)));
                 editor.commit();
