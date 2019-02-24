@@ -6,7 +6,7 @@
 
     <include layout="@layout/navigation_bar"/>
 
-    <TextView
+  <TextView
         android:id="@+id/yourScoreHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,6 +15,17 @@
         android:fontFamily="@font/rashfeng"
         android:textColor="@android:color/black"
         android:text="@string/your_score" />
+
+ <com.google.android.material.card.MaterialCardView
+    style="@style/Widget.MaterialComponents.CardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/mtrl_card_spacing"
+    android:layout_marginTop="@dimen/mtrl_card_spacing"
+    android:layout_marginRight="@dimen/mtrl_card_spacing"
+    android:minHeight="100dp">
+ 
+ 
 
     <LinearLayout
         android:orientation="horizontal"
@@ -46,6 +57,9 @@
             android:padding = "5dp"
             android:text = "@string/success_rate" />
     </LinearLayout>
+   
+ 
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,10 +72,11 @@
             android:layout_width="match_parent">
         </ListView>
 
-
+	
     </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
 
-    <TextView
+<TextView
         android:id="@+id/highScoreHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,6 +85,17 @@
         android:fontFamily="@font/rashfeng"
         android:textColor="@android:color/black"
         android:text="@string/high_score" />
+
+<com.google.android.material.card.MaterialCardView
+    style="@style/Widget.MaterialComponents.CardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/mtrl_card_spacing"
+    android:layout_marginTop="@dimen/mtrl_card_spacing"
+    android:layout_marginRight="@dimen/mtrl_card_spacing"
+    android:minHeight="300dp">
+
+    
     <LinearLayout
         android:id = "@+id/relativeLayout1"
         android:layout_width = "fill_parent"
@@ -114,4 +140,5 @@
 
 
     </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
 </LinearLayout>

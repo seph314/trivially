@@ -25,14 +25,14 @@
             android:textStyle="italic"
             android:layout_marginBottom="20dp"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/playAgainBtn"
             android:layout_width="match_parent"
             android:layout_height="81dp"
             android:layout_gravity="center_horizontal"
             android:text="@string/play_again" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/homeBtn"
             android:layout_width="match_parent"
             android:layout_height="88dp"

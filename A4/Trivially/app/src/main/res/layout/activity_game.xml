@@ -7,12 +7,12 @@
     <include layout="@layout/navigation_bar"/>
 
 
-        <Button
+        <com.google.android.material.button.MaterialButton    
             android:id="@+id/startGameBtn"
             android:layout_width="match_parent"
             android:layout_height="117dp"
             android:text="@string/start"
-            android:layout_marginHorizontal="10dp"/>
+            android:layout_marginHorizontal="10dp" />
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
@@ -21,21 +21,21 @@
                 android:orientation="horizontal"
                 android:layout_marginHorizontal="10dp">
 
-                <Button
+                <com.google.android.material.button.MaterialButton		   
                     android:id="@+id/easyBtn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/easy" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton	 
                     android:id="@+id/normalBtn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/normal" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton		 
                     android:id="@+id/hardBtn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

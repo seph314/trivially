@@ -6,7 +6,7 @@
 
     <include layout="@layout/navigation_bar"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/logOutBtn"
         android:layout_width="match_parent"
         android:layout_height="117dp"
