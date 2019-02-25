@@ -151,7 +151,7 @@ public class GameActivity extends AppCompatActivity {
             try {
                 URL url = new URL(source);
                 urlConnection = url.openConnection();
-                bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
 
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
