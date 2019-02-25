@@ -14,7 +14,7 @@
     <string name="your_score">Your Score</string>
     <string name="name">Name</string>
     <string name="games_played">Games Played</string>
-    <string name="success_rate">correct (%)</string>
+    <string name="success_rate">Correct (%)</string>
     <string name="quit">QUIT</string>
     <string name="log_in_with_facebook">Log in with Facebook</string>
     <string name="client_id">157522692483-rmsf4idenl8gt5ve2pspqa6ohbvjbivm.apps.googleusercontent.com</string>
