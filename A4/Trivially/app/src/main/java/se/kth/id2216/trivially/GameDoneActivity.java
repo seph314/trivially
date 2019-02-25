@@ -10,10 +10,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class GameDoneActivity extends Activity {
 
     private int score;
     private int numberOfQuestions;
+    Long firebaseScore = 0L;
+    Long firebaseGamesPlayed = 0L;
+    DatabaseReference mRootRef;
+    DatabaseReference mPlayersRef;
+    FirebaseUser currentFirebaseUser;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,7 +35,17 @@ public class GameDoneActivity extends Activity {
         setupActivity();
     }
 
+    private void updateFirebase(){
+        System.out.println(currentFirebaseUser.getUid());
+        mPlayersRef.child(currentFirebaseUser.getUid()).child("score").setValue(firebaseScore + score);
+        mPlayersRef.child(currentFirebaseUser.getUid()).child("gamesPlayed").setValue(firebaseGamesPlayed + 1);
+    }
+
     private void setupActivity(){
+        mRootRef = FirebaseDatabase.getInstance().getReference();
+        mPlayersRef = mRootRef.child("players");
+        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         score = sharedPrefs.getInt("score",-1);
         numberOfQuestions = sharedPrefs.getInt("questions",-1);
@@ -67,5 +90,31 @@ public class GameDoneActivity extends Activity {
             scoreCommentString = "Oh, i bet u were just unlucky.";
 
         return scoreCommentString;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(currentFirebaseUser != null)
+            mPlayersRef.child(currentFirebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    firebaseScore = dataSnapshot.child("score").getValue(Long.class);
+                    firebaseGamesPlayed = dataSnapshot.child("gamesPlayed").getValue(Long.class);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if(currentFirebaseUser != null)
+            updateFirebase();
     }
 }

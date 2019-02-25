@@ -3,8 +3,11 @@ package se.kth.id2216.trivially;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.text.Html;
@@ -21,9 +24,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -40,6 +41,7 @@ public class InGameActivity extends Activity {
     int categoryID;
     String difficulty;
     JSONObject questionsFromOpenTrivia = null;
+    List<Button> answerButtons = new ArrayList<>();
 
 
     @Override
@@ -82,8 +84,6 @@ public class InGameActivity extends Activity {
                 }
 
                 questionsFromOpenTrivia = new JSONObject(stringBuilder.toString());
-                System.out.println("Questions " + questionsFromOpenTrivia.toString());
-
 
                 incorrectAnswers = new String[numberOfQuestions][3];
                 answers = new String[numberOfQuestions][4];
@@ -94,11 +94,11 @@ public class InGameActivity extends Activity {
 
                 jArray = questionsFromOpenTrivia.getJSONArray("results");
                 for(int i = 0; i < jArray.length(); i++){
-                    questions[i] = jArray.getJSONObject(i).getString("question");
-                    correctAnswers[i] = jArray.getJSONObject(i).getString("correct_answer");
+                    questions[i] = String.valueOf(Html.fromHtml(jArray.getJSONObject(i).getString("question"), Html.FROM_HTML_MODE_COMPACT));
+                    correctAnswers[i] = String.valueOf(Html.fromHtml(jArray.getJSONObject(i).getString("correct_answer"), Html.FROM_HTML_MODE_COMPACT));
                     incorrectAnswersJson = new JSONArray(jArray.getJSONObject(i).getString("incorrect_answers"));
                     for(int j = 0; j < incorrectAnswersJson.length(); j++)
-                        incorrectAnswers[i][j] = incorrectAnswersJson.getString(j);
+                        incorrectAnswers[i][j] = String.valueOf(Html.fromHtml(incorrectAnswersJson.getString(j), Html.FROM_HTML_MODE_COMPACT));
                 }
 
                 int r;
@@ -140,15 +140,22 @@ public class InGameActivity extends Activity {
 
 
     private void setupActivity(){
-        final  TextView questionHeading = findViewById(R.id.questionHeading);
-        final  TextView questionText = findViewById(R.id.questionText);
-        final Button quitButton = findViewById(R.id.quitBtn);
-        final Button guessButton1 = findViewById(R.id.guessBtn1);
-        final Button guessButton2 = findViewById(R.id.guessBtn2);
-        final Button guessButton3 = findViewById(R.id.guessBtn3);
-        final Button guessButton4 = findViewById(R.id.guessBtn4);
+         TextView questionHeading = findViewById(R.id.questionHeading);
+        TextView scoreText = findViewById(R.id.scoreText);
+         TextView questionText = findViewById(R.id.questionText);
+        Button quitButton = findViewById(R.id.quitBtn);
+        Button guessButton1 = findViewById(R.id.guessBtn1);
+        Button guessButton2 = findViewById(R.id.guessBtn2);
+        Button guessButton3 = findViewById(R.id.guessBtn3);
+        Button guessButton4 = findViewById(R.id.guessBtn4);
+
+        answerButtons.add(guessButton1);
+        answerButtons.add(guessButton2);
+        answerButtons.add(guessButton3);
+        answerButtons.add(guessButton4);
 
         questionHeading.setText(String.format("Question %d", currentQuestionNumber +1));
+        scoreText.setText(String.valueOf("Score: "+ score));
         questionText.setText(questions[currentQuestionNumber]);
         quitButton.setOnClickListener(new View.OnClickListener()
         {
@@ -157,7 +164,6 @@ public class InGameActivity extends Activity {
                 finish();
             }
         });
-
         guessButton1.setText(answers[currentQuestionNumber][0]);
         guessButton1.setOnClickListener(new View.OnClickListener()
         {
@@ -194,8 +200,11 @@ public class InGameActivity extends Activity {
 
 
     private void onAnswerChoice(int answerNumber){
-        if(correctAnswers[currentQuestionNumber].equals(answers[currentQuestionNumber][answerNumber]))
+
+        if(correctAnswers[currentQuestionNumber].equals(answers[currentQuestionNumber][answerNumber])) {
             score++;
+        }
+        colorButtons();
         if(currentQuestionNumber < numberOfQuestions -1)
             currentQuestionNumber++;
         else if(currentQuestionNumber == numberOfQuestions - 1){
@@ -209,6 +218,39 @@ public class InGameActivity extends Activity {
             finish();
             startActivity(intent);
         }
-        setupActivity();
     }
+
+    private void colorButtons(){
+        final Drawable defaultColor = findViewById(R.id.guessBtn1).getBackground();
+        for(int i = 0; i < 4; i++){
+            if(correctAnswers[currentQuestionNumber].equals(answers[currentQuestionNumber][i])) {
+                answerButtons.get(i).setBackgroundResource(R.drawable.back_correct);
+                answerButtons.get(i).setEnabled(false);
+            }
+            else{
+                answerButtons.get(i).setBackgroundResource(R.drawable.back_incorrect);
+                answerButtons.get(i).setEnabled(false);
+            }
+        }
+
+
+        new CountDownTimer(1000, 50) {
+
+            @Override
+            public void onTick(long arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onFinish() {
+                for(int i = 0; i < 4; i++){
+                    answerButtons.get(i).setBackground(defaultColor);
+                    answerButtons.get(i).setEnabled(true);
+                }
+                setupActivity();
+            }
+        }.start();
+    }
+
 }

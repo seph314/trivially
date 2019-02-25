@@ -13,6 +13,17 @@
             android:layout_height="117dp"
             android:text="@string/start"
             android:layout_marginHorizontal="10dp"/>
+    <TextView
+        android:id="@+id/difficultyHeader"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:textSize="30sp"
+        android:fontFamily="@font/rashfeng"
+        android:textColor="@android:color/black"
+        android:text="@string/difficulty"
+        />
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
@@ -42,10 +53,23 @@
                     android:layout_weight="1"
                     android:text="@string/hard" />
             </LinearLayout>
+    <TextView
+        android:id="@+id/categoryHeader"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:textSize="30sp"
+        android:fontFamily="@font/rashfeng"
+        android:textColor="@android:color/black"
+        android:text="@string/category"
+        />
     <ListView
         android:id="@+id/categoriesList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp">
+        android:layout_marginHorizontal="10dp"
+        android:choiceMode="singleChoice"
+        android:listSelector="@drawable/back_chosen">
     </ListView>
 </LinearLayout>

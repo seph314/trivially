@@ -10,20 +10,40 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class HighScoreActivity extends Activity {
 
     SharedPreferences sharedPrefs;
     String[][] scores;
     String[][] personalScore;
+    private DatabaseReference mRootRef;
+    private DatabaseReference mPlayersRef;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_high_score);
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mRootRef = FirebaseDatabase.getInstance().getReference();
+        mPlayersRef = mRootRef.child("players");
+
         setupActivity();
     }
 
@@ -47,8 +67,87 @@ public class HighScoreActivity extends Activity {
             }
         });
 
-        getHighScore();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        final FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentFirebaseUser != null)
+            mPlayersRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    scores = new String[(int) dataSnapshot.getChildrenCount()][3];
+                    int i = 0;
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        if(snapshot.child("visible").getValue(Boolean.class)) {
+                            scores[i][0] = snapshot.child("alias").getValue(String.class);
+                            scores[i][1] = String.valueOf(snapshot.child("gamesPlayed").getValue(Long.class));
+                            if (Long.parseLong(scores[i][1]) != 0)
+                                scores[i][2] = divideLong(snapshot.child("score").getValue(Long.class), Long.parseLong(scores[i][1]));
+                            else
+                                scores[i][2] = "0";
+                        }
+                        else{
+                            scores[i][0] = "private user";
+                            scores[i][2] = "-1";
+                        }
+                        i++;
+                    }
+                    personalScore = new String[1][3];
+                    personalScore[0][0] = dataSnapshot.child(currentFirebaseUser.getUid()).child("alias").getValue(String.class);
+                    personalScore[0][1] = String.valueOf(dataSnapshot.child(currentFirebaseUser.getUid()).child("gamesPlayed").getValue(Long.class));
+                    if(Long.parseLong(personalScore[0][1]) != 0)
+                        personalScore[0][2] = divideLong(dataSnapshot.child(currentFirebaseUser.getUid()).child("score").getValue(Long.class), Long.parseLong(personalScore[0][1]));
+                    else
+                        personalScore[0][2] = "0";
+
+                    updateListView(removePrivateUsers(sortArray(scores)), removePrivateUsers(sortArray(personalScore)));
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+    }
+
+    private String[][] sortArray(String[][] scores){
+        String[] temp;
+        for (int i = 0; i < scores.length - 1; i++) {
+            for (int j = i + 1; j < scores.length; j++) {
+                if (Double.parseDouble(scores[i][2]) < Double.parseDouble(scores[j][2])) {
+                    temp = scores[j];
+                    scores[j] = scores[i];
+                    scores[i] = temp;
+                }
+                else if (Double.parseDouble(scores[i][2]) == Double.parseDouble(scores[j][2]) && Long.parseLong(scores[i][1]) < Long.parseLong(scores[j][1])) {
+                    temp = scores[j];
+                    scores[j] = scores[i];
+                    scores[i] = temp;
+                }
+            }
+        }
+        return scores;
+    }
+
+    private String[][] removePrivateUsers(String[][] scores){
+        int privateUsers = 0;
+        for(int i = 0; i < scores.length; i++){
+            if(scores[i][2].equals("-1"))
+                privateUsers++;
+        }
+
+        String[][] visibleScores = new String[scores.length - privateUsers][3];
+        for(int i = 0; i < scores.length; i++){
+            if(scores[i][2].equals("-1"))
+                continue;
+            else
+                visibleScores[i] = scores[i];
+        }
+        return visibleScores;
+    }
+
+    private void updateListView(String[][] scores, String[][] personalScore){
         ListView personalListView = findViewById(R.id.personalScore);
         ListViewAdapter adapter1 = new ListViewAdapter(this, personalScore);
         personalListView.setAdapter(adapter1);
@@ -60,55 +159,12 @@ public class HighScoreActivity extends Activity {
         lview.setAdapter(adapter2);
 
         adapter2.notifyDataSetChanged();
-
     }
 
-    private void getHighScore() {
-        JSONObject triviaResponse = null;
-        try {
-            triviaResponse = new JSONObject(
-                    "{\n" +
-                            "    \"score\": [\n" +
-                            "        {\n" +
-                            "            \"name\": \"John Doe\",\n" +
-                            "            \"gamesPlayed\": 7777,\n" +
-                            "            \"successRate\": 95.00\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"name\": \"McAffee\",\n" +
-                            "            \"gamesPlayed\": 314,\n" +
-                            "            \"successRate\": 59.00\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"name\": \"Norton\",\n" +
-                            "            \"gamesPlayed\": 200,\n" +
-                            "            \"successRate\": 20.22\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"name\": \"Cranky Sloth\",\n" +
-                            "            \"gamesPlayed\": 10000,\n" +
-                            "            \"successRate\": 0.04\n" +
-                            "        }\n" +
-                            "    ]\n" +
-                            "}");
+    private String divideLong(Long numerator, Long denominator){
 
-            JSONArray jArray = triviaResponse.getJSONArray("score");
-            scores = new String[jArray.length()][3];
-            for(int i = 0; i < jArray.length(); i++){
-                scores[i][0] = jArray.getJSONObject(i).getString("name");
-                scores[i][1] = String.valueOf(jArray.getJSONObject(i).getInt("gamesPlayed"));
-                scores[i][2] = jArray.getJSONObject(i).getString("successRate") + "%";
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        personalScore = new String[1][3];
-        personalScore[0] =
-                new String[]{
-                        "John Doe", "7777", "95.00%"
-                };
-
-
+        double result = ((double) numerator / ((double) denominator * 10.00)) * 100;
+        DecimalFormat numberFormat = new DecimalFormat("#.00");
+        return numberFormat.format(result);
     }
 }
